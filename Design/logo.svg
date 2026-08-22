@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1b1f4a"/>
+      <stop offset="1" stop-color="#070a1f"/>
+    </linearGradient>
+    <radialGradient id="glowC" cx="0.25" cy="0.2" r="0.6">
+      <stop offset="0" stop-color="#4addff" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#4addff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowM" cx="0.8" cy="0.85" r="0.6">
+      <stop offset="0" stop-color="#cc73ff" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#cc73ff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4addff"/>
+      <stop offset="1" stop-color="#cc73ff"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.08"/>
+    </linearGradient>
+    <filter id="blur" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="28"/></filter>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+    <clipPath id="squircle"><rect x="0" y="0" width="1024" height="1024" rx="232"/></clipPath>
+  </defs>
+  <g clip-path="url(#squircle)">
+    <rect width="1024" height="1024" fill="url(#bg)"/>
+    <rect width="1024" height="1024" fill="url(#glowC)"/>
+    <rect width="1024" height="1024" fill="url(#glowM)"/>
+    <!-- Left card: the loser, dim glass -->
+    <g filter="url(#shadow)">
+      <rect x="150" y="290" width="330" height="440" rx="56" fill="url(#glass)" stroke="#ffffff" stroke-opacity="0.35" stroke-width="6"/>
+    </g>
+    <rect x="210" y="360" width="210" height="28" rx="14" fill="#ffffff" fill-opacity="0.35"/>
+    <rect x="210" y="420" width="150" height="28" rx="14" fill="#ffffff" fill-opacity="0.22"/>
+    <rect x="210" y="480" width="180" height="28" rx="14" fill="#ffffff" fill-opacity="0.22"/>
+    <!-- Right card: the winner, glowing gradient border -->
+    <rect x="470" y="250" width="400" height="520" rx="64" fill="url(#accent)" opacity="0.55" filter="url(#blur)"/>
+    <g filter="url(#shadow)">
+      <rect x="480" y="260" width="380" height="500" rx="60" fill="url(#glass)" stroke="url(#accent)" stroke-width="10"/>
+    </g>
+    <rect x="545" y="340" width="250" height="30" rx="15" fill="#ffffff" fill-opacity="0.9"/>
+    <rect x="545" y="406" width="180" height="30" rx="15" fill="#ffffff" fill-opacity="0.55"/>
+    <rect x="545" y="472" width="210" height="30" rx="15" fill="#ffffff" fill-opacity="0.55"/>
+    <!-- Winner check badge -->
+    <circle cx="670" cy="640" r="78" fill="url(#accent)"/>
+    <circle cx="670" cy="640" r="78" fill="none" stroke="#ffffff" stroke-opacity="0.6" stroke-width="6"/>
+    <path d="M628 642 L658 672 L716 608" fill="none" stroke="#0b0e22" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- top sheen -->
+    <path d="M0 0 H1024 V300 C760 420 300 420 0 300 Z" fill="#ffffff" fill-opacity="0.06"/>
+  </g>
+</svg>
