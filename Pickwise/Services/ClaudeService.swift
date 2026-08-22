@@ -121,6 +121,7 @@ struct ClaudeService {
             var result = try JSONDecoder().decode(ComparisonResult.self, from: jsonData)
             // Defensive: normalise table widths so the UI never indexes out of range.
             let n = result.products.count
+            result.products = result.products.map { var p = $0; p.score = min(100, max(0, p.score)); return p }
             result.table = result.table.map { row in
                 var r = row
                 if r.values.count < n { r.values += Array(repeating: "—", count: n - r.values.count) }

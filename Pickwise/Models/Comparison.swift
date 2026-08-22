@@ -66,7 +66,7 @@ struct ComparisonResult: Codable, Equatable {
                     "price": ["type": "string", "description": "Current typical price with currency, or 'Unknown'"],
                     "pros": ["type": "array", "items": ["type": "string"]],
                     "cons": ["type": "array", "items": ["type": "string"]],
-                    "score": ["type": "integer", "minimum": 0, "maximum": 100]
+                    "score": ["type": "integer", "description": "0–100 overall value score"]
                 ]
             ]],
             "table": ["type": "array", "items": [
