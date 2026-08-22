@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1b1f4a"/><stop offset="1" stop-color="#070a1f"/></linearGradient>
+    <radialGradient id="c" cx="0.15" cy="0.1" r="0.6"><stop offset="0" stop-color="#4addff" stop-opacity="0.5"/><stop offset="1" stop-color="#4addff" stop-opacity="0"/></radialGradient>
+    <radialGradient id="m" cx="0.9" cy="0.9" r="0.6"><stop offset="0" stop-color="#cc73ff" stop-opacity="0.5"/><stop offset="1" stop-color="#cc73ff" stop-opacity="0"/></radialGradient>
+    <linearGradient id="acc" x1="0" x2="1"><stop offset="0" stop-color="#4addff"/><stop offset="1" stop-color="#cc73ff"/></linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/><rect width="1200" height="630" fill="url(#c)"/><rect width="1200" height="630" fill="url(#m)"/>
+  <image href="logo.png" x="80" y="175" width="280" height="280"/>
+  <text x="410" y="290" font-family="SF Pro Rounded, Helvetica Neue, Arial" font-weight="700" font-size="84" fill="#ffffff">WhosBetter</text>
+  <text x="410" y="360" font-family="SF Pro Rounded, Helvetica Neue, Arial" font-weight="700" font-size="46" fill="url(#acc)">Compare anything. Get one verdict.</text>
+  <text x="410" y="420" font-family="Helvetica Neue, Arial" font-size="26" fill="#a2a7c4">Mac app · Free 7-day trial · $29 once</text>
+</svg>

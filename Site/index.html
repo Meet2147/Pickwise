@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WhosBetter — Compare anything. Get one verdict.</title>
+<meta name="description" content="WhosBetter is a Mac app that compares any 2–5 products on price, specs, and pros & cons — then tells you exactly which one to buy.">
+<link rel="icon" href="assets/logo.png">
+<meta property="og:title" content="WhosBetter — Compare anything. Get one verdict.">
+<meta property="og:description" content="A Mac app that compares any products and tells you which to buy. Free 7-day trial, $29 once.">
+<meta property="og:image" content="https://whosbetter.app/assets/og.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://whosbetter.app/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://whosbetter.app/assets/og.png">
+<style>
+/* ===== WhosBetter design system (mirrors Brand.swift) ===== */
+:root{
+  --accent:#4addff; --accent2:#cc73ff; --win:#0d8c52; --warn:#b86b00; --danger:#c7263a;
+  --bg-top:#e6edff; --bg-bottom:#f5f2ff;
+  --text:#0b0e22; --muted:#4b5068;
+  --glass:rgba(255,255,255,.55); --glass-border:rgba(255,255,255,.75);
+  --shadow:0 6px 14px rgba(0,0,0,.08);
+  --radius:18px; --radius-s:10px;
+  --s-xs:4px; --s-s:8px; --s-m:16px; --s-l:24px; --s-xl:40px;
+  --font-display:ui-rounded,"SF Pro Rounded","SF Pro Display",-apple-system,system-ui,sans-serif;
+  --font-body:-apple-system,"SF Pro Text",system-ui,sans-serif;
+  --font-mono:ui-monospace,"SF Mono",Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root{
+  --win:#70edad; --warn:#ffb866; --danger:#ff737f;
+  --bg-top:#0f1229; --bg-bottom:#050814;
+  --text:#f3f4ff; --muted:#a2a7c4;
+  --glass:rgba(255,255,255,.06); --glass-border:rgba(255,255,255,.16);
+  --shadow:0 6px 14px rgba(0,0,0,.35);
+}}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);color:var(--text);background:var(--bg-bottom);min-height:100vh;line-height:1.5;overflow-x:hidden}
+.aurora{position:fixed;inset:0;z-index:-2;background:linear-gradient(var(--bg-top),var(--bg-bottom))}
+body::before,body::after{content:"";position:fixed;z-index:-1;border-radius:50%;filter:blur(120px);pointer-events:none}
+body::before{width:560px;height:560px;left:-180px;top:-160px;background:var(--accent);opacity:.32}
+body::after{width:600px;height:600px;right:-200px;bottom:-200px;background:var(--accent2);opacity:.3}
+.wrap{max-width:1100px;margin:0 auto;padding:0 var(--s-l)}
+h1,h2,h3{font-family:var(--font-display);letter-spacing:-.01em}
+.grad{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+/* signature element: GlassCard */
+.glass{background:var(--glass);backdrop-filter:blur(24px) saturate(160%);-webkit-backdrop-filter:blur(24px) saturate(160%);border:1px solid var(--glass-border);border-radius:var(--radius);box-shadow:var(--shadow);padding:var(--s-m)}
+.glass.glow{position:relative;border-color:transparent;box-shadow:0 0 48px rgba(74,221,255,.35)}
+.glass.glow::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.btn{display:inline-flex;align-items:center;gap:8px;font:600 15px var(--font-display);padding:12px 22px;border-radius:999px;text-decoration:none;border:1px solid rgba(255,255,255,.35);transition:transform .12s,opacity .12s;cursor:pointer}
+.btn:active{transform:scale(.97)}
+.btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:rgba(0,0,0,.85)}
+.btn.ghost{background:var(--glass);backdrop-filter:blur(20px);color:var(--text)}
+nav{display:flex;align-items:center;justify-content:space-between;padding:var(--s-m) 0}
+nav .logo{display:flex;align-items:center;gap:10px;font:700 18px var(--font-display);color:var(--text);text-decoration:none}
+nav .logo img{width:32px;height:32px;border-radius:8px}
+nav ul{display:flex;gap:var(--s-l);list-style:none}
+nav a{color:var(--muted);text-decoration:none;font-size:14px}
+.hero{padding:var(--s-xl) 0 var(--s-l);text-align:center}
+.hero h1{font-size:clamp(36px,6vw,64px);line-height:1.05;margin-bottom:var(--s-m)}
+.hero p{font-size:19px;color:var(--muted);max-width:640px;margin:0 auto var(--s-l)}
+.hero .cta{display:flex;gap:var(--s-m);justify-content:center;flex-wrap:wrap}
+.hero small{display:block;margin-top:var(--s-s);color:var(--muted);font-size:13px}
+.shot{margin:var(--s-l) auto 0;max-width:1000px}
+.shot img{width:100%;height:auto;display:block;border-radius:var(--radius)}
+section{padding:var(--s-xl) 0}
+section h2{font-size:34px;text-align:center;margin-bottom:var(--s-s)}
+section .sub{text-align:center;color:var(--muted);margin-bottom:var(--s-l)}
+.grid{display:grid;gap:var(--s-m);grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.feature h3{font-size:17px;margin:var(--s-s) 0 var(--s-xs)}
+.feature p{color:var(--muted);font-size:14px}
+.feature .icon{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;color:#0b0e22;font-weight:700}
+.gallery{display:grid;gap:var(--s-m);grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.gallery img{width:100%;height:auto;display:block;border-radius:var(--radius-s)}
+.gallery figcaption{font-size:13px;color:var(--muted);margin-top:var(--s-s)}
+video{width:100%;border-radius:var(--radius-s);display:block;background:#000}
+.pricing{max-width:460px;margin:0 auto;text-align:center;padding:var(--s-l)}
+.pricing .price{font:700 56px var(--font-display);line-height:1}
+.pricing .per{color:var(--muted);font-size:14px;margin-bottom:var(--s-m)}
+.pricing ul{list-style:none;text-align:left;margin:var(--s-m) 0;display:grid;gap:6px;font-size:14px}
+.pricing li::before{content:"✓";color:var(--win);font-weight:700;margin-right:8px}
+.pill{display:inline-block;font:600 12px var(--font-body);letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:var(--glass);border:1px solid var(--glass-border);color:var(--muted)}
+footer{padding:var(--s-xl) 0;color:var(--muted);font-size:13px;text-align:center}
+footer a{color:var(--muted)}
+.mono{font-family:var(--font-mono)}
+@media (max-width:640px){nav ul{display:none}}
+</style>
+</head>
+<body>
+<div class="aurora"></div>
+<div class="wrap">
+  <nav>
+    <a class="logo" href="#"><img src="assets/logo.png" alt=""> WhosBetter</a>
+    <ul><li><a href="#features">Features</a></li><li><a href="#demo">Demo</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#download">Download</a></li></ul>
+    <a class="btn primary" href="#download">Download</a>
+  </nav>
+
+  <header class="hero">
+    <span class="pill">macOS 13+ · Apple Silicon &amp; Intel</span>
+    <h1 style="margin-top:16px">Compare anything.<br><span class="grad">Get one verdict.</span></h1>
+    <p>Headphones, laptops, cars, SaaS plans — type 2–5 products and WhosBetter researches current prices and specs, weighs the pros and cons, and tells you exactly which one to buy.</p>
+    <div class="cta">
+      <a class="btn primary" id="download-hero" href="downloads/WhosBetter.dmg">⬇ Download for Mac</a>
+      <a class="btn ghost" href="#demo">Watch the demo</a>
+    </div>
+    <small>Free 7-day trial · $29 once, yours forever · Notarized by Apple</small>
+    <div class="shot glass"><img src="assets/screenshot-verdict.png" alt="WhosBetter showing a verdict: Go with the Sony WH-1000XM5" width="1286" height="995"></div>
+  </header>
+
+  <section id="features">
+    <h2>Built to end <span class="grad">analysis paralysis</span></h2>
+    <p class="sub">No 40-tab research sessions. No affiliate-driven “best of” lists.</p>
+    <div class="grid">
+      <div class="glass feature"><div class="icon">1</div><h3>Any product, any category</h3><p>Paste names, links, or raw specs. WhosBetter does live web research so prices and specs are current, and cites its sources.</p></div>
+      <div class="glass feature"><div class="icon">2</div><h3>Capture from your screen</h3><p>Looking at a product page? Hit the camera, drag a box, and it's added to the comparison — no copy-pasting.</p></div>
+      <div class="glass feature"><div class="icon">3</div><h3>One clear verdict</h3><p>Side-by-side table, honest pros &amp; cons, a 0–100 score — and a single “go with X” answer with the reasoning and the caveats.</p></div>
+      <div class="glass feature"><div class="icon">🔒</div><h3>Private by design</h3><p>Your comparisons stay on your Mac. Uses your own Anthropic API key, stored in the macOS Keychain. No accounts, no tracking.</p></div>
+    </div>
+  </section>
+
+  <section id="gallery">
+    <h2>Looks at home on your Mac</h2>
+    <p class="sub">Frosted glass, light and dark.</p>
+    <div class="gallery">
+      <figure class="glass"><img src="assets/screenshot-verdict.png" alt="Dark appearance" loading="lazy"><figcaption>Verdict, scores, pros &amp; cons — dark appearance</figcaption></figure>
+      <figure class="glass"><img src="assets/screenshot-light.png" alt="Light appearance" loading="lazy"><figcaption>The same comparison in light appearance</figcaption></figure>
+    </div>
+  </section>
+
+  <section id="demo">
+    <h2>See it decide in 60 seconds</h2>
+    <p class="sub">Three headphones in, one answer out.</p>
+    <div class="glass"><video controls playsinline preload="metadata" poster="assets/screenshot-verdict.png"><source src="assets/demo.mp4" type="video/mp4">Your browser doesn't support video.</video></div>
+  </section>
+
+  <section id="pricing">
+    <h2>Simple pricing</h2>
+    <p class="sub">Try it free for 7 days. Then buy it once.</p>
+    <div class="glass glow pricing">
+      <span class="pill">Lifetime license</span>
+      <div class="price" style="margin-top:12px">$29</div>
+      <div class="per">one-time · no subscription</div>
+      <ul>
+        <li>Unlimited comparisons</li>
+        <li>Screen capture to compare</li>
+        <li>Free updates for v1.x</li>
+        <li>Use on your own Macs</li>
+      </ul>
+      <a class="btn primary" id="buy" href="#download">Start free trial</a>
+      <small style="display:block;margin-top:10px;color:var(--muted)">Requires an Anthropic API key (pay-as-you-go, typically a few cents per comparison).</small>
+    </div>
+  </section>
+
+  <section id="download">
+    <div class="glass" style="text-align:center;padding:var(--s-xl)">
+      <h2>Download WhosBetter</h2>
+      <p class="sub">Universal binary · macOS 13 Ventura or later · Signed &amp; notarized</p>
+      <a class="btn primary" id="download-main" href="downloads/WhosBetter.dmg">⬇ Download WhosBetter.dmg</a>
+      <p class="mono" id="version" style="margin-top:12px;font-size:12px;color:var(--muted)">v1.0.0</p>
+    </div>
+  </section>
+
+  <footer>© 2026 Meet Jethwa · <a href="mailto:meetjethwa3@gmail.com">Support</a> · Not affiliated with any product shown.</footer>
+</div>
+<script>
+// Keep the version label + links in sync with version.json (same file the app's updater reads).
+fetch('version.json',{cache:'no-store'}).then(r=>r.json()).then(v=>{
+  document.getElementById('version').textContent='v'+v.version+' (build '+v.build+')';
+  for(const id of ['download-hero','download-main']){document.getElementById(id).href=v.url}
+}).catch(()=>{});
+</script>
+</body>
+</html>
