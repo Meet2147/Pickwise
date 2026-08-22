@@ -21,7 +21,8 @@ die(){ printf '\033[1;31m✗ %s\033[0m\n' "$*" >&2; exit 1; }
 
 command -v xcodegen >/dev/null || die "xcodegen missing (brew install xcodegen)"
 command -v create-dmg >/dev/null || die "create-dmg missing (brew install create-dmg)"
-xcrun notarytool history --keychain-profile "$NOTARY_PROFILE" >/dev/null 2>&1 \
+SKIP_NOTARIZE="${SKIP_NOTARIZE:-0}"   # 1 = local dry run (no notarization, no staple, no publish)
+[ "$SKIP_NOTARIZE" = 1 ] || xcrun notarytool history --keychain-profile "$NOTARY_PROFILE" >/dev/null 2>&1 \
   || die "Notary profile '$NOTARY_PROFILE' not found. Create it once with: xcrun notarytool store-credentials \"$NOTARY_PROFILE\" --apple-id <email> --team-id C9NLF34677 --password <app-specific-password>"
 
 rm -rf "$DIST"; mkdir -p "$DIST"
@@ -48,12 +49,18 @@ BIN="$APP/Contents/MacOS/$APP_NAME"
 lipo -archs "$BIN" | grep -q "x86_64" && lipo -archs "$BIN" | grep -q "arm64" || die "Not universal: $(lipo -archs "$BIN")"
 echo "archs: $(lipo -archs "$BIN")"
 
+notarize(){ # $1=path $2=json
+  [ "$SKIP_NOTARIZE" = 1 ] && { echo "(skipped: SKIP_NOTARIZE=1)"; return 0; }
+  xcrun notarytool submit "$1" --keychain-profile "$NOTARY_PROFILE" --wait --output-format json > "$2" \
+    || { ID=$(python3 -c "import json;print(json.load(open('$2')).get('id',''))" 2>/dev/null); [ -n "$ID" ] && xcrun notarytool log "$ID" --keychain-profile "$NOTARY_PROFILE"; die "Notarization of $1 failed"; }
+  grep -q '"status": *"Accepted"' "$2" || { cat "$2"; die "Notarization of $1 not Accepted"; }
+  xcrun stapler staple "$1"
+}
+
 log "Notarizing .app"
 ditto -c -k --keepParent "$APP" "$DIST/$APP_NAME.zip"
-xcrun notarytool submit "$DIST/$APP_NAME.zip" --keychain-profile "$NOTARY_PROFILE" --wait --output-format json > "$DIST/notary-app.json" \
-  || { xcrun notarytool log "$(python3 -c 'import json;print(json.load(open("'"$DIST/notary-app.json"'"))["id"])')" --keychain-profile "$NOTARY_PROFILE"; die "App notarization failed"; }
-grep -q '"status": *"Accepted"' "$DIST/notary-app.json" || { cat "$DIST/notary-app.json"; die "App notarization not Accepted"; }
-xcrun stapler staple "$APP"
+notarize "$DIST/$APP_NAME.zip" "$DIST/notary-app.json"
+[ "$SKIP_NOTARIZE" = 1 ] || xcrun stapler staple "$APP"
 
 log "Building DMG"
 create-dmg --volname "$APP_NAME" --window-size 540 380 --icon-size 128 \
@@ -63,13 +70,13 @@ create-dmg --volname "$APP_NAME" --window-size 540 380 --icon-size 128 \
 
 log "Signing + notarizing DMG"
 codesign --force --timestamp --sign "$SIGN_ID" "$DMG"
-xcrun notarytool submit "$DMG" --keychain-profile "$NOTARY_PROFILE" --wait --output-format json > "$DIST/notary-dmg.json" \
-  || die "DMG notarization failed"
-grep -q '"status": *"Accepted"' "$DIST/notary-dmg.json" || { cat "$DIST/notary-dmg.json"; die "DMG notarization not Accepted"; }
-xcrun stapler staple "$DMG"
+notarize "$DMG" "$DIST/notary-dmg.json"
 
 log "Gatekeeper verification"
-spctl -a -t open --context context:primary-signature -vv "$DMG" 2>&1 | tee "$DIST/spctl.txt"
+spctl -a -t open --context context:primary-signature -vv "$DMG" 2>&1 | tee "$DIST/spctl.txt" || true
+if [ "$SKIP_NOTARIZE" = 1 ]; then
+  echo "(dry run: Gatekeeper acceptance requires notarization — rerun without SKIP_NOTARIZE)"; log "Dry run done → $DMG"; exit 0
+fi
 grep -q "Notarized Developer ID" "$DIST/spctl.txt" || die "Gatekeeper did not accept the DMG"
 
 log "Publishing to Site/"
