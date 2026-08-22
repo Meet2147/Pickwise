@@ -1,0 +1,22 @@
+# Xcode
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+xcuserdata/
+DerivedData/
+build/
+dist/
+*.dSYM.zip
+*.dSYM
+
+# Secrets — never commit
+.env
+.env.*
+*.p12
+*.cer
+*.mobileprovision
+*.provisionprofile
+Secrets.xcconfig
+Config/Local.xcconfig
+
+# macOS
+.DS_Store

@@ -1,0 +1,429 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		18AC9E421F55C292617240CD /* HistoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A2227872279A94238D5BFB /* HistoryStore.swift */; };
+		1B462049A5B2089BBCFE91F7 /* KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB976639566012535C980C3 /* KeychainStore.swift */; };
+		1F04DA8232A5A25E68BCEB66 /* PolarConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A8F73678844D9F717D690D /* PolarConfig.swift */; };
+		357B161310965ED9712E9A28 /* LicenseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0397146EF2D227ABA6955E /* LicenseManager.swift */; };
+		5020D57312AA1EB16164EA89 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BF1BFAC03DFC5D43147BBA /* ResultView.swift */; };
+		55974183118C90B2A3930818 /* ComparisonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7C6B4799903A6BCC09E7BC /* ComparisonView.swift */; };
+		592CE0903B5A828D8DC03C13 /* SheetsAndSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105F0DEFC46D99E857E0EFFC /* SheetsAndSettings.swift */; };
+		7FAD4AE4E1ABC5FE560FE89F /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCC7B1EBEE7A0C71632F363 /* RootView.swift */; };
+		822854E4B27E3F84C44F78A9 /* WhosBetterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F239E7836A85DCB838F76BA7 /* WhosBetterApp.swift */; };
+		839EFF4E4D1C8B185FC723D5 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95570361306D289D387B20FE /* AppStore.swift */; };
+		87B5063889502D4882543F70 /* Brand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80482EDAF6FD90EA407C705C /* Brand.swift */; };
+		9BC05D52C6A26195306E1DB1 /* ClaudeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4102B861C4F90183B5493763 /* ClaudeService.swift */; };
+		9CF333FB7AEAADCF7699DE3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 774784B18E7C242FAC5E9A79 /* Assets.xcassets */; };
+		B7090379D5A09631568A1A9E /* ScreenCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C294A01C6E71EBB5A77E50CC /* ScreenCapture.swift */; };
+		CD0E6A6F4A884A7EBAA1D4D1 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F8EA7B69558CF162F17B04 /* AppError.swift */; };
+		D4E8AA8430E6588006A978FE /* Comparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E40F5F28E082EAF47BEDF0 /* Comparison.swift */; };
+		F48368A51E9457E5976C778F /* UpdateChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2FCC7ECE81F4CC9C89EB95 /* UpdateChecker.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		105F0DEFC46D99E857E0EFFC /* SheetsAndSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetsAndSettings.swift; sourceTree = "<group>"; };
+		2D0397146EF2D227ABA6955E /* LicenseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseManager.swift; sourceTree = "<group>"; };
+		40A8F73678844D9F717D690D /* PolarConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarConfig.swift; sourceTree = "<group>"; };
+		4102B861C4F90183B5493763 /* ClaudeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeService.swift; sourceTree = "<group>"; };
+		5E1E81A85C218BF69FA2A7CD /* WhosBetter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WhosBetter.entitlements; sourceTree = "<group>"; };
+		5FCC7B1EBEE7A0C71632F363 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		65A2227872279A94238D5BFB /* HistoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryStore.swift; sourceTree = "<group>"; };
+		70BF1BFAC03DFC5D43147BBA /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
+		746A07225D5F08AC5A2F0116 /* WhosBetter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhosBetter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		774784B18E7C242FAC5E9A79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7EB976639566012535C980C3 /* KeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStore.swift; sourceTree = "<group>"; };
+		80482EDAF6FD90EA407C705C /* Brand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brand.swift; sourceTree = "<group>"; };
+		8B7C6B4799903A6BCC09E7BC /* ComparisonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonView.swift; sourceTree = "<group>"; };
+		95570361306D289D387B20FE /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
+		C294A01C6E71EBB5A77E50CC /* ScreenCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenCapture.swift; sourceTree = "<group>"; };
+		C4E40F5F28E082EAF47BEDF0 /* Comparison.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comparison.swift; sourceTree = "<group>"; };
+		CD2FCC7ECE81F4CC9C89EB95 /* UpdateChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateChecker.swift; sourceTree = "<group>"; };
+		F239E7836A85DCB838F76BA7 /* WhosBetterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhosBetterApp.swift; sourceTree = "<group>"; };
+		F7F8EA7B69558CF162F17B04 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		02C9608BBBFC8758911A864E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C4E40F5F28E082EAF47BEDF0 /* Comparison.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		134BC1491A7236A7369058F1 = {
+			isa = PBXGroup;
+			children = (
+				FFA1D17CDDC40B590E29F851 /* WhosBetter */,
+				6C367E66CA7495100FCE2909 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3837FBB43568E73BAABC1327 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				95570361306D289D387B20FE /* AppStore.swift */,
+				F239E7836A85DCB838F76BA7 /* WhosBetterApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		43B11EF1A734C1B64DFB86CE /* Design */ = {
+			isa = PBXGroup;
+			children = (
+				80482EDAF6FD90EA407C705C /* Brand.swift */,
+			);
+			path = Design;
+			sourceTree = "<group>";
+		};
+		5A072682DB483E62662F34BC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8B7C6B4799903A6BCC09E7BC /* ComparisonView.swift */,
+				70BF1BFAC03DFC5D43147BBA /* ResultView.swift */,
+				5FCC7B1EBEE7A0C71632F363 /* RootView.swift */,
+				105F0DEFC46D99E857E0EFFC /* SheetsAndSettings.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		6C367E66CA7495100FCE2909 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				746A07225D5F08AC5A2F0116 /* WhosBetter.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E855555476CF39A5172D6AA7 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				F7F8EA7B69558CF162F17B04 /* AppError.swift */,
+				4102B861C4F90183B5493763 /* ClaudeService.swift */,
+				65A2227872279A94238D5BFB /* HistoryStore.swift */,
+				7EB976639566012535C980C3 /* KeychainStore.swift */,
+				2D0397146EF2D227ABA6955E /* LicenseManager.swift */,
+				40A8F73678844D9F717D690D /* PolarConfig.swift */,
+				C294A01C6E71EBB5A77E50CC /* ScreenCapture.swift */,
+				CD2FCC7ECE81F4CC9C89EB95 /* UpdateChecker.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		EC5C854583EA1BFCD7CFEB5C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				774784B18E7C242FAC5E9A79 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		FFA1D17CDDC40B590E29F851 /* WhosBetter */ = {
+			isa = PBXGroup;
+			children = (
+				5E1E81A85C218BF69FA2A7CD /* WhosBetter.entitlements */,
+				3837FBB43568E73BAABC1327 /* App */,
+				43B11EF1A734C1B64DFB86CE /* Design */,
+				02C9608BBBFC8758911A864E /* Models */,
+				EC5C854583EA1BFCD7CFEB5C /* Resources */,
+				E855555476CF39A5172D6AA7 /* Services */,
+				5A072682DB483E62662F34BC /* Views */,
+			);
+			path = WhosBetter;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		213ECBA1BF05263A1913CA8E /* WhosBetter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9B125AB6FCA492AA7C815FFF /* Build configuration list for PBXNativeTarget "WhosBetter" */;
+			buildPhases = (
+				0B329EE8BFD813BB93C5BBF6 /* Sources */,
+				E3B7D05BAC1EA7AB4CF8756A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WhosBetter;
+			packageProductDependencies = (
+			);
+			productName = WhosBetter;
+			productReference = 746A07225D5F08AC5A2F0116 /* WhosBetter.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EBB12A7D5EC946703F373D19 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					213ECBA1BF05263A1913CA8E = {
+						DevelopmentTeam = C9NLF34677;
+					};
+				};
+			};
+			buildConfigurationList = 5AA760669084772D82D9E920 /* Build configuration list for PBXProject "WhosBetter" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 134BC1491A7236A7369058F1;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 6C367E66CA7495100FCE2909 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				213ECBA1BF05263A1913CA8E /* WhosBetter */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E3B7D05BAC1EA7AB4CF8756A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9CF333FB7AEAADCF7699DE3E /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0B329EE8BFD813BB93C5BBF6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD0E6A6F4A884A7EBAA1D4D1 /* AppError.swift in Sources */,
+				839EFF4E4D1C8B185FC723D5 /* AppStore.swift in Sources */,
+				87B5063889502D4882543F70 /* Brand.swift in Sources */,
+				9BC05D52C6A26195306E1DB1 /* ClaudeService.swift in Sources */,
+				D4E8AA8430E6588006A978FE /* Comparison.swift in Sources */,
+				55974183118C90B2A3930818 /* ComparisonView.swift in Sources */,
+				18AC9E421F55C292617240CD /* HistoryStore.swift in Sources */,
+				1B462049A5B2089BBCFE91F7 /* KeychainStore.swift in Sources */,
+				357B161310965ED9712E9A28 /* LicenseManager.swift in Sources */,
+				1F04DA8232A5A25E68BCEB66 /* PolarConfig.swift in Sources */,
+				5020D57312AA1EB16164EA89 /* ResultView.swift in Sources */,
+				7FAD4AE4E1ABC5FE560FE89F /* RootView.swift in Sources */,
+				B7090379D5A09631568A1A9E /* ScreenCapture.swift in Sources */,
+				592CE0903B5A828D8DC03C13 /* SheetsAndSettings.swift in Sources */,
+				F48368A51E9457E5976C778F /* UpdateChecker.swift in Sources */,
+				822854E4B27E3F84C44F78A9 /* WhosBetterApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		78BB88EA473B3A8B066853F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = WhosBetter/WhosBetter.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = WhosBetter/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.meetjethwa.WhosBetter;
+				SDKROOT = macosx;
+				SWIFT_STRICT_CONCURRENCY = minimal;
+			};
+			name = Debug;
+		};
+		8D2C379CFEC0F4E11E4F25AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = WhosBetter/WhosBetter.entitlements;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = WhosBetter/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.meetjethwa.WhosBetter;
+				SDKROOT = macosx;
+				SWIFT_STRICT_CONCURRENCY = minimal;
+			};
+			name = Release;
+		};
+		A8D8B0300C06921E9D12B036 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "arm64 x86_64";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = C9NLF34677;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.10;
+			};
+			name = Release;
+		};
+		F8559A916628F1696C8A77A3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "arm64 x86_64";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = C9NLF34677;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.10;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5AA760669084772D82D9E920 /* Build configuration list for PBXProject "WhosBetter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F8559A916628F1696C8A77A3 /* Debug */,
+				A8D8B0300C06921E9D12B036 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		9B125AB6FCA492AA7C815FFF /* Build configuration list for PBXNativeTarget "WhosBetter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				78BB88EA473B3A8B066853F3 /* Debug */,
+				8D2C379CFEC0F4E11E4F25AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EBB12A7D5EC946703F373D19 /* Project object */;
+}
