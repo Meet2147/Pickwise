@@ -68,18 +68,17 @@ nav .links{display:flex;gap:var(--s5);font-size:14px;color:var(--ink-2)}
 nav .links a:hover{color:var(--ink)}
 
 /* hero: split; headline left, floating tilted app right */
-.hero{position:relative;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--s6);align-items:center;padding:var(--s6) 0 var(--s8)}
-.hero h1{font-size:clamp(40px,5.2vw,64px);margin:var(--s4) 0 var(--s5)}
+.hero{position:relative;padding:var(--s7) 0 var(--s7)}
+.hero .copy{max-width:720px}
+.hero h1{font-size:clamp(38px,4.6vw,58px);margin:var(--s4) 0 var(--s5)}
 .hero h1 em{font-style:normal;color:var(--accent)}
 .hero .cta{display:flex;gap:var(--s3);align-items:center;margin-top:var(--s5);flex-wrap:wrap}
 .hero .fine{margin-top:var(--s4);font-size:13px;color:var(--ink-3)}
 .hero .fine b{color:var(--ink-2);font-weight:500}
-.palette{perspective:1600px;max-height:600px;overflow:hidden;border-radius:var(--r-l)}
-.palette img{border-radius:var(--r-l);border:1px solid var(--hair-2);box-shadow:0 24px 60px rgba(0,0,0,.55),0 2px 0 rgba(255,255,255,.06) inset;
-  transform:rotateY(-6deg) rotateX(2deg) translateX(20px);transform-origin:left center;
-  animation:settle .9s var(--spring) both;transition:transform .5s var(--ease)}
-.palette:hover img{transform:rotateY(-2deg) rotateX(0) translateX(10px)}
-@keyframes settle{from{opacity:0;transform:rotateY(-12deg) translateX(60px) translateY(24px)}}
+.palette{position:relative;margin-top:var(--s7);max-height:620px;overflow:hidden;border-radius:var(--r-l) var(--r-l) 0 0;border:1px solid var(--hair-2);border-bottom:0;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.palette::after{content:"";position:absolute;inset:auto 0 0 0;height:160px;background:linear-gradient(transparent,var(--ground))}
+.palette img{width:100%;animation:settle .7s var(--ease) both}
+@keyframes settle{from{opacity:0;transform:translateY(24px)}}
 .platform{font:500 12px var(--mono);color:var(--ink-3);letter-spacing:.02em}
 
 /* sections */
@@ -126,8 +125,7 @@ footer{padding:var(--s6) 0;border-top:1px solid var(--hair);color:var(--ink-3);f
 footer a:hover{color:var(--ink-2)}
 
 @media (max-width:880px){
-  .hero{grid-template-columns:1fr;padding-top:var(--s6)}
-  .palette img{transform:none;animation:none}
+  .hero{padding-top:var(--s6)}
   .split{grid-template-columns:1fr}.split .sticky{position:static}
   .gallery{grid-template-columns:1fr}
   .price{grid-template-columns:1fr}.price .right{justify-items:start;text-align:left}
@@ -146,9 +144,9 @@ footer a:hover{color:var(--ink-2)}
   </nav>
 
   <header class="hero">
-    <div>
+    <div class="copy">
       <span class="platform">macOS 13+ · Apple silicon &amp; Intel</span>
-      <h1>Which one should I buy? <em>Ask once.</em></h1>
+      <h1>Which one should I buy?<br><em>Ask once.</em></h1>
       <p class="lede">Type in two to five products. Pickwise checks current prices and specs, weighs the trade-offs, and answers with one verdict — and the reasoning behind it.</p>
       <div class="cta">
         <a class="btn accent" id="dl-hero" href="downloads/Pickwise.dmg">Download for Mac</a>
@@ -156,7 +154,7 @@ footer a:hover{color:var(--ink-2)}
       </div>
       <p class="fine">Free for 7 days, then <b>$29 once</b>. Signed and notarized by Apple.</p>
     </div>
-    <div class="palette"><img src="assets/screenshot-verdict.png" alt="Pickwise comparing three headphones and recommending the Sony WH-1000XM5" width="1286" height="995" fetchpriority="high"></div>
+    <div class="palette"><img src="assets/screenshot-verdict.png" alt="Pickwise comparing three headphones and recommending the Sony WH-1000XM5" width="1240" height="950" fetchpriority="high"></div>
   </header>
 
   <section id="how">
