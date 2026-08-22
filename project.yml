@@ -1,4 +1,4 @@
-name: WhosBetter
+name: Pickwise
 options:
   bundleIdPrefix: com.meetjethwa
   deploymentTarget:
@@ -17,29 +17,29 @@ settings:
     ONLY_ACTIVE_ARCH: NO
     DEVELOPMENT_TEAM: C9NLF34677
 targets:
-  WhosBetter:
+  Pickwise:
     type: application
     platform: macOS
     sources:
-      - path: WhosBetter
+      - path: Pickwise
         excludes: ["Resources/Info.plist"]
     info:
-      path: WhosBetter/Resources/Info.plist
+      path: Pickwise/Resources/Info.plist
       properties:
-        CFBundleName: WhosBetter
-        CFBundleDisplayName: WhosBetter
-        CFBundleIdentifier: com.meetjethwa.WhosBetter
+        CFBundleName: Pickwise
+        CFBundleDisplayName: Pickwise
+        CFBundleIdentifier: com.meetjethwa.Pickwise
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         LSMinimumSystemVersion: $(MACOSX_DEPLOYMENT_TARGET)
         LSApplicationCategoryType: public.app-category.productivity
         NSHumanReadableCopyright: "© 2026 Meet Jethwa"
-        NSScreenCaptureUsageDescription: "WhosBetter captures a region of your screen so you can add a product you're looking at to a comparison. Captures never leave your Mac except as part of the comparison you send to the AI."
+        NSScreenCaptureUsageDescription: "Pickwise captures a region of your screen so you can add a product you're looking at to a comparison. Captures never leave your Mac except as part of the comparison you send to the AI."
         NSAppTransportSecurity:
           NSAllowsArbitraryLoads: false
         ITSAppUsesNonExemptEncryption: false
     entitlements:
-      path: WhosBetter/WhosBetter.entitlements
+      path: Pickwise/Pickwise.entitlements
       properties:
         com.apple.security.app-sandbox: false
         com.apple.security.cs.allow-unsigned-executable-memory: false
@@ -47,7 +47,7 @@ targets:
         com.apple.security.network.client: true
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.meetjethwa.WhosBetter
+        PRODUCT_BUNDLE_IDENTIFIER: com.meetjethwa.Pickwise
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         ENABLE_HARDENED_RUNTIME: YES
         CODE_SIGN_STYLE: Manual

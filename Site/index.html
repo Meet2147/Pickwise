@@ -3,171 +3,260 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>WhosBetter — Compare anything. Get one verdict.</title>
-<meta name="description" content="WhosBetter is a Mac app that compares any 2–5 products on price, specs, and pros & cons — then tells you exactly which one to buy.">
+<title>Pickwise — Which one should I buy?</title>
+<meta name="description" content="Pickwise is a Mac app that compares any 2–5 products on current price, specs, and trade-offs, then gives you one verdict with the reasoning.">
 <link rel="icon" href="assets/logo.png">
-<meta property="og:title" content="WhosBetter — Compare anything. Get one verdict.">
+<meta property="og:title" content="Pickwise — Which one should I buy?">
 <meta property="og:description" content="A Mac app that compares any products and tells you which to buy. Free 7-day trial, $29 once.">
-<meta property="og:image" content="https://whosbetter.app/assets/og.png">
+<meta property="og:image" content="https://pickwise.app/assets/og.png">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://whosbetter.app/">
+<meta property="og:url" content="https://pickwise.app/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://whosbetter.app/assets/og.png">
+<meta name="twitter:image" content="https://pickwise.app/assets/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
-/* ===== WhosBetter design system (mirrors Brand.swift) ===== */
+/* ===== Pickwise site tokens — Raycast recipe, Pickwise accent ===== */
 :root{
-  --accent:#4addff; --accent2:#cc73ff; --win:#0d8c52; --warn:#b86b00; --danger:#c7263a;
-  --bg-top:#e6edff; --bg-bottom:#f5f2ff;
-  --text:#0b0e22; --muted:#4b5068;
-  --glass:rgba(255,255,255,.55); --glass-border:rgba(255,255,255,.75);
-  --shadow:0 6px 14px rgba(0,0,0,.08);
-  --radius:18px; --radius-s:10px;
-  --s-xs:4px; --s-s:8px; --s-m:16px; --s-l:24px; --s-xl:40px;
-  --font-display:ui-rounded,"SF Pro Rounded","SF Pro Display",-apple-system,system-ui,sans-serif;
-  --font-body:-apple-system,"SF Pro Text",system-ui,sans-serif;
-  --font-mono:ui-monospace,"SF Mono",Menlo,monospace;
+  --ground:#0F0F11; --surface:rgba(255,255,255,.06); --surface-2:rgba(255,255,255,.09);
+  --hair:rgba(255,255,255,.10); --hair-2:rgba(255,255,255,.18);
+  --ink:#FFFFFF; --ink-2:#B0B3B8; --ink-3:#74777E;
+  --accent:#4ADDFF; --accent-ink:#0B1B22;
+  --win:#70EDAD; --warn:#FFB866;
+  --display:"Inter Tight",ui-sans-serif,system-ui,sans-serif;
+  --body:"Inter",ui-sans-serif,system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --r-s:8px; --r-m:12px; --r-l:16px; --r-xl:24px;
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:40px; --s7:64px; --s8:112px;
+  --ease:cubic-bezier(.2,.8,.2,1); --spring:cubic-bezier(.34,1.4,.64,1);
 }
-@media (prefers-color-scheme:dark){:root{
-  --win:#70edad; --warn:#ffb866; --danger:#ff737f;
-  --bg-top:#0f1229; --bg-bottom:#050814;
-  --text:#f3f4ff; --muted:#a2a7c4;
-  --glass:rgba(255,255,255,.06); --glass-border:rgba(255,255,255,.16);
-  --shadow:0 6px 14px rgba(0,0,0,.35);
-}}
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:var(--font-body);color:var(--text);background:var(--bg-bottom);min-height:100vh;line-height:1.5;overflow-x:hidden}
-.aurora{position:fixed;inset:0;z-index:-2;background:linear-gradient(var(--bg-top),var(--bg-bottom))}
-body::before,body::after{content:"";position:fixed;z-index:-1;border-radius:50%;filter:blur(120px);pointer-events:none}
-body::before{width:560px;height:560px;left:-180px;top:-160px;background:var(--accent);opacity:.32}
-body::after{width:600px;height:600px;right:-200px;bottom:-200px;background:var(--accent2);opacity:.3}
-.wrap{max-width:1100px;margin:0 auto;padding:0 var(--s-l)}
-h1,h2,h3{font-family:var(--font-display);letter-spacing:-.01em}
-.grad{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
-/* signature element: GlassCard */
-.glass{background:var(--glass);backdrop-filter:blur(24px) saturate(160%);-webkit-backdrop-filter:blur(24px) saturate(160%);border:1px solid var(--glass-border);border-radius:var(--radius);box-shadow:var(--shadow);padding:var(--s-m)}
-.glass.glow{position:relative;border-color:transparent;box-shadow:0 0 48px rgba(74,221,255,.35)}
-.glass.glow::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
-.btn{display:inline-flex;align-items:center;gap:8px;font:600 15px var(--font-display);padding:12px 22px;border-radius:999px;text-decoration:none;border:1px solid rgba(255,255,255,.35);transition:transform .12s,opacity .12s;cursor:pointer}
-.btn:active{transform:scale(.97)}
-.btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:rgba(0,0,0,.85)}
-.btn.ghost{background:var(--glass);backdrop-filter:blur(20px);color:var(--text)}
-nav{display:flex;align-items:center;justify-content:space-between;padding:var(--s-m) 0}
-nav .logo{display:flex;align-items:center;gap:10px;font:700 18px var(--font-display);color:var(--text);text-decoration:none}
-nav .logo img{width:32px;height:32px;border-radius:8px}
-nav ul{display:flex;gap:var(--s-l);list-style:none}
-nav a{color:var(--muted);text-decoration:none;font-size:14px}
-.hero{padding:var(--s-xl) 0 var(--s-l);text-align:center}
-.hero h1{font-size:clamp(36px,6vw,64px);line-height:1.05;margin-bottom:var(--s-m)}
-.hero p{font-size:19px;color:var(--muted);max-width:640px;margin:0 auto var(--s-l)}
-.hero .cta{display:flex;gap:var(--s-m);justify-content:center;flex-wrap:wrap}
-.hero small{display:block;margin-top:var(--s-s);color:var(--muted);font-size:13px}
-.shot{margin:var(--s-l) auto 0;max-width:1000px}
-.shot img{width:100%;height:auto;display:block;border-radius:var(--radius)}
-section{padding:var(--s-xl) 0}
-section h2{font-size:34px;text-align:center;margin-bottom:var(--s-s)}
-section .sub{text-align:center;color:var(--muted);margin-bottom:var(--s-l)}
-.grid{display:grid;gap:var(--s-m);grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
-.feature h3{font-size:17px;margin:var(--s-s) 0 var(--s-xs)}
-.feature p{color:var(--muted);font-size:14px}
-.feature .icon{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;color:#0b0e22;font-weight:700}
-.gallery{display:grid;gap:var(--s-m);grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
-.gallery img{width:100%;height:auto;display:block;border-radius:var(--radius-s)}
-.gallery figcaption{font-size:13px;color:var(--muted);margin-top:var(--s-s)}
-video{width:100%;border-radius:var(--radius-s);display:block;background:#000}
-.pricing{max-width:460px;margin:0 auto;text-align:center;padding:var(--s-l)}
-.pricing .price{font:700 56px var(--font-display);line-height:1}
-.pricing .per{color:var(--muted);font-size:14px;margin-bottom:var(--s-m)}
-.pricing ul{list-style:none;text-align:left;margin:var(--s-m) 0;display:grid;gap:6px;font-size:14px}
-.pricing li::before{content:"✓";color:var(--win);font-weight:700;margin-right:8px}
-.pill{display:inline-block;font:600 12px var(--font-body);letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:var(--glass);border:1px solid var(--glass-border);color:var(--muted)}
-footer{padding:var(--s-xl) 0;color:var(--muted);font-size:13px;text-align:center}
-footer a{color:var(--muted)}
-.mono{font-family:var(--font-mono)}
-@media (max-width:640px){nav ul{display:none}}
+html{color-scheme:dark}
+body{background:var(--ground);color:var(--ink);font:500 15px/1.55 var(--body);-webkit-font-smoothing:antialiased;text-wrap:pretty;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.02em;line-height:1.05}
+.wrap{max-width:1120px;margin:0 auto;padding:0 var(--s5)}
+p.lede{color:var(--ink-2);font-size:17px;line-height:1.6;max-width:52ch}
+.muted{color:var(--ink-2)}
+
+/* backdrop: soft-focused color band behind the hero only (recipe signature) */
+.backdrop{position:absolute;inset:0 0 auto 0;height:920px;z-index:-1;overflow:hidden;pointer-events:none}
+.backdrop::before{content:"";position:absolute;left:50%;top:-240px;width:1400px;height:760px;transform:translateX(-40%);border-radius:50%;
+  background:radial-gradient(closest-side,rgba(74,221,255,.38),transparent 70%),radial-gradient(closest-side at 70% 60%,rgba(204,115,255,.30),transparent 70%);filter:blur(80px)}
+.backdrop::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 55%,var(--ground))}
+
+/* chips: keyboard shortcuts (recipe signature) */
+kbd{font:500 12px/1 var(--mono);color:var(--ink-2);background:var(--surface);border:1px solid var(--hair-2);border-radius:6px;padding:5px 7px;display:inline-block;min-width:26px;text-align:center}
+.kbdrow{display:inline-flex;gap:4px;align-items:center}
+
+/* buttons: translucent white pills, never solid bright fills */
+.btn{display:inline-flex;align-items:center;gap:var(--s3);font:600 14px var(--body);color:var(--ink);background:var(--surface-2);border:1px solid var(--hair-2);border-radius:999px;padding:11px 18px;
+  backdrop-filter:blur(12px);transition:background .15s var(--ease),transform .15s var(--ease),border-color .15s var(--ease)}
+.btn:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.28);transform:translateY(-1px)}
+.btn:active{transform:translateY(0) scale(.98)}
+.btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.btn.accent{background:var(--accent);color:var(--accent-ink);border-color:transparent}
+.btn.accent:hover{background:#6EE5FF}
+.btn.accent kbd{color:var(--accent-ink);background:rgba(0,0,0,.10);border-color:rgba(0,0,0,.15)}
+
+nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+.brand{display:flex;align-items:center;gap:10px;font:600 16px var(--display);letter-spacing:-.01em}
+.brand img{width:28px;height:28px;border-radius:7px}
+nav .links{display:flex;gap:var(--s5);font-size:14px;color:var(--ink-2)}
+nav .links a:hover{color:var(--ink)}
+
+/* hero: split; headline left, floating tilted app right */
+.hero{position:relative;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--s6);align-items:center;padding:var(--s6) 0 var(--s8)}
+.hero h1{font-size:clamp(40px,5.2vw,64px);margin:var(--s4) 0 var(--s5)}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero .cta{display:flex;gap:var(--s3);align-items:center;margin-top:var(--s5);flex-wrap:wrap}
+.hero .fine{margin-top:var(--s4);font-size:13px;color:var(--ink-3)}
+.hero .fine b{color:var(--ink-2);font-weight:500}
+.palette{perspective:1600px;max-height:600px;overflow:hidden;border-radius:var(--r-l)}
+.palette img{border-radius:var(--r-l);border:1px solid var(--hair-2);box-shadow:0 24px 60px rgba(0,0,0,.55),0 2px 0 rgba(255,255,255,.06) inset;
+  transform:rotateY(-6deg) rotateX(2deg) translateX(20px);transform-origin:left center;
+  animation:settle .9s var(--spring) both;transition:transform .5s var(--ease)}
+.palette:hover img{transform:rotateY(-2deg) rotateX(0) translateX(10px)}
+@keyframes settle{from{opacity:0;transform:rotateY(-12deg) translateX(60px) translateY(24px)}}
+.platform{font:500 12px var(--mono);color:var(--ink-3);letter-spacing:.02em}
+
+/* sections */
+section{padding:var(--s8) 0;border-top:1px solid var(--hair)}
+section h2{font-size:clamp(28px,3.4vw,40px);max-width:20ch}
+.split{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:var(--s6);align-items:start}
+.split .sticky{position:sticky;top:var(--s6)}
+
+/* how it works: numbered vertical narrative with real UI */
+.steps{display:grid;gap:var(--s7)}
+.step{display:grid;grid-template-columns:56px 1fr;gap:var(--s4);align-items:start}
+.step .n{font:500 13px var(--mono);color:var(--accent);padding-top:4px}
+.step h3{font-size:22px;margin-bottom:var(--s2)}
+.step p{color:var(--ink-2);max-width:54ch}
+.step figure{margin-top:var(--s4);border-radius:var(--r-m);border:1px solid var(--hair);overflow:hidden;background:var(--surface);transition:transform .2s var(--ease),border-color .2s var(--ease)}
+.step figure:hover{transform:translateY(-2px);border-color:var(--hair-2)}
+
+/* keyboard strip */
+.keys{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--s3)}
+.key{display:flex;justify-content:space-between;align-items:center;padding:var(--s4) var(--s5);background:var(--surface);border:1px solid var(--hair);border-radius:var(--r-m);transition:transform .2s var(--ease),background .2s var(--ease)}
+.key:hover{transform:translateY(-2px);background:var(--surface-2)}
+.key .dot{width:8px;height:8px;border-radius:50%;margin-right:var(--s3);flex:none}
+.key span{display:flex;align-items:center;font-size:14px}
+
+/* gallery */
+.gallery{display:grid;grid-template-columns:1fr 1fr;gap:var(--s4)}
+.gallery figure img{border-radius:var(--r-m);border:1px solid var(--hair)}
+.gallery figcaption{margin-top:var(--s3);font-size:13px;color:var(--ink-3)}
+video{width:100%;border-radius:var(--r-l);border:1px solid var(--hair);display:block;background:#000}
+
+/* pricing: one surface, split */
+.price{display:grid;grid-template-columns:1fr auto;gap:var(--s6);align-items:center;padding:var(--s6);background:var(--surface);border:1px solid var(--hair);border-radius:var(--r-xl)}
+.price .amount{font:600 72px/1 var(--display);letter-spacing:-.03em}
+.price .amount small{font:500 16px var(--body);color:var(--ink-2);letter-spacing:0;margin-left:6px}
+.price ul{list-style:none;margin:var(--s4) 0 0;display:grid;gap:6px;color:var(--ink-2);font-size:14px}
+.price li::before{content:"—";color:var(--ink-3);margin-right:10px}
+.price .right{text-align:right;display:grid;gap:var(--s3);justify-items:end}
+.price .fine{font-size:12px;color:var(--ink-3);max-width:28ch}
+
+/* download */
+.dl{display:flex;justify-content:space-between;align-items:center;gap:var(--s5);flex-wrap:wrap}
+.dl .meta{font:500 12px var(--mono);color:var(--ink-3)}
+footer{padding:var(--s6) 0;border-top:1px solid var(--hair);color:var(--ink-3);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--s3)}
+footer a:hover{color:var(--ink-2)}
+
+@media (max-width:880px){
+  .hero{grid-template-columns:1fr;padding-top:var(--s6)}
+  .palette img{transform:none;animation:none}
+  .split{grid-template-columns:1fr}.split .sticky{position:static}
+  .gallery{grid-template-columns:1fr}
+  .price{grid-template-columns:1fr}.price .right{justify-items:start;text-align:left}
+  nav .links{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-<div class="aurora"></div>
+<div class="backdrop" aria-hidden="true"></div>
 <div class="wrap">
   <nav>
-    <a class="logo" href="#"><img src="assets/logo.png" alt=""> WhosBetter</a>
-    <ul><li><a href="#features">Features</a></li><li><a href="#demo">Demo</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#download">Download</a></li></ul>
-    <a class="btn primary" href="#download">Download</a>
+    <a class="brand" href="#"><img src="assets/logo.png" alt="">Pickwise</a>
+    <div class="links"><a href="#how">How it works</a><a href="#demo">Demo</a><a href="#pricing">Pricing</a></div>
+    <a class="btn" id="dl-nav" href="downloads/Pickwise.dmg">Download</a>
   </nav>
 
   <header class="hero">
-    <span class="pill">macOS 13+ · Apple Silicon &amp; Intel</span>
-    <h1 style="margin-top:16px">Compare anything.<br><span class="grad">Get one verdict.</span></h1>
-    <p>Headphones, laptops, cars, SaaS plans — type 2–5 products and WhosBetter researches current prices and specs, weighs the pros and cons, and tells you exactly which one to buy.</p>
-    <div class="cta">
-      <a class="btn primary" id="download-hero" href="downloads/WhosBetter.dmg">⬇ Download for Mac</a>
-      <a class="btn ghost" href="#demo">Watch the demo</a>
+    <div>
+      <span class="platform">macOS 13+ · Apple silicon &amp; Intel</span>
+      <h1>Which one should I buy? <em>Ask once.</em></h1>
+      <p class="lede">Type in two to five products. Pickwise checks current prices and specs, weighs the trade-offs, and answers with one verdict — and the reasoning behind it.</p>
+      <div class="cta">
+        <a class="btn accent" id="dl-hero" href="downloads/Pickwise.dmg">Download for Mac</a>
+        <a class="btn" href="#demo">Watch the demo <span class="kbdrow"><kbd>60s</kbd></span></a>
+      </div>
+      <p class="fine">Free for 7 days, then <b>$29 once</b>. Signed and notarized by Apple.</p>
     </div>
-    <small>Free 7-day trial · $29 once, yours forever · Notarized by Apple</small>
-    <div class="shot glass"><img src="assets/screenshot-verdict.png" alt="WhosBetter showing a verdict: Go with the Sony WH-1000XM5" width="1286" height="995"></div>
+    <div class="palette"><img src="assets/screenshot-verdict.png" alt="Pickwise comparing three headphones and recommending the Sony WH-1000XM5" width="1286" height="995" fetchpriority="high"></div>
   </header>
 
-  <section id="features">
-    <h2>Built to end <span class="grad">analysis paralysis</span></h2>
-    <p class="sub">No 40-tab research sessions. No affiliate-driven “best of” lists.</p>
-    <div class="grid">
-      <div class="glass feature"><div class="icon">1</div><h3>Any product, any category</h3><p>Paste names, links, or raw specs. WhosBetter does live web research so prices and specs are current, and cites its sources.</p></div>
-      <div class="glass feature"><div class="icon">2</div><h3>Capture from your screen</h3><p>Looking at a product page? Hit the camera, drag a box, and it's added to the comparison — no copy-pasting.</p></div>
-      <div class="glass feature"><div class="icon">3</div><h3>One clear verdict</h3><p>Side-by-side table, honest pros &amp; cons, a 0–100 score — and a single “go with X” answer with the reasoning and the caveats.</p></div>
-      <div class="glass feature"><div class="icon">🔒</div><h3>Private by design</h3><p>Your comparisons stay on your Mac. Uses your own Anthropic API key, stored in the macOS Keychain. No accounts, no tracking.</p></div>
+  <section id="how">
+    <div class="split">
+      <div class="sticky">
+        <h2>Three moves. One answer.</h2>
+        <p class="lede" style="margin-top:var(--s4)">Every comparison follows the same shape, so you always know where the verdict came from.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="n">01</div>
+          <div>
+            <h3>Put the contenders in</h3>
+            <p>Names, store links, or pasted spec sheets. Looking at a product page? Press the camera, drag a box over it, and it's in.</p>
+            <figure><img src="assets/ui-input.png" alt="Three product inputs with screen-capture buttons" loading="lazy"></figure>
+          </div>
+        </div>
+        <div class="step">
+          <div class="n">02</div>
+          <div>
+            <h3>It does the research</h3>
+            <p>Pickwise searches the web for today's prices and specs, scores each product 0–100, and lists the honest pros and cons — with sources you can open.</p>
+            <figure><img src="assets/ui-cards.png" alt="Per-product score rings with pros and cons" loading="lazy"></figure>
+          </div>
+        </div>
+        <div class="step">
+          <div class="n">03</div>
+          <div>
+            <h3>You get a verdict, not a shortlist</h3>
+            <p>“Go with X.” Then why, who the runner-up is, and the situations where you'd choose differently.</p>
+            <figure><img src="assets/ui-verdict.png" alt="The verdict card: Go with the Sony WH-1000XM5" loading="lazy"></figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="keys">
+    <h2 style="margin-bottom:var(--s5)">Built for the keyboard</h2>
+    <div class="keys">
+      <div class="key"><span><i class="dot" style="background:var(--accent)"></i>New comparison</span><span class="kbdrow"><kbd>⌘</kbd><kbd>N</kbd></span></div>
+      <div class="key"><span><i class="dot" style="background:var(--win)"></i>Compare</span><span class="kbdrow"><kbd>⌘</kbd><kbd>↵</kbd></span></div>
+      <div class="key"><span><i class="dot" style="background:var(--warn)"></i>Settings &amp; API key</span><span class="kbdrow"><kbd>⌘</kbd><kbd>,</kbd></span></div>
     </div>
   </section>
 
   <section id="gallery">
-    <h2>Looks at home on your Mac</h2>
-    <p class="sub">Frosted glass, light and dark.</p>
     <div class="gallery">
-      <figure class="glass"><img src="assets/screenshot-verdict.png" alt="Dark appearance" loading="lazy"><figcaption>Verdict, scores, pros &amp; cons — dark appearance</figcaption></figure>
-      <figure class="glass"><img src="assets/screenshot-light.png" alt="Light appearance" loading="lazy"><figcaption>The same comparison in light appearance</figcaption></figure>
+      <figure><img src="assets/screenshot-verdict.png" alt="Pickwise in dark appearance" loading="lazy"><figcaption>Dark appearance</figcaption></figure>
+      <figure><img src="assets/screenshot-light.png" alt="Pickwise in light appearance" loading="lazy"><figcaption>Light appearance — follows the system setting</figcaption></figure>
     </div>
   </section>
 
   <section id="demo">
-    <h2>See it decide in 60 seconds</h2>
-    <p class="sub">Three headphones in, one answer out.</p>
-    <div class="glass"><video controls playsinline preload="metadata" poster="assets/screenshot-verdict.png"><source src="assets/demo.mp4" type="video/mp4">Your browser doesn't support video.</video></div>
+    <h2 style="margin-bottom:var(--s5)">Sixty seconds, three headphones</h2>
+    <video controls playsinline preload="metadata" poster="assets/screenshot-verdict.png"><source src="assets/demo.mp4" type="video/mp4"></video>
   </section>
 
   <section id="pricing">
-    <h2>Simple pricing</h2>
-    <p class="sub">Try it free for 7 days. Then buy it once.</p>
-    <div class="glass glow pricing">
-      <span class="pill">Lifetime license</span>
-      <div class="price" style="margin-top:12px">$29</div>
-      <div class="per">one-time · no subscription</div>
-      <ul>
-        <li>Unlimited comparisons</li>
-        <li>Screen capture to compare</li>
-        <li>Free updates for v1.x</li>
-        <li>Use on your own Macs</li>
-      </ul>
-      <a class="btn primary" id="buy" href="#download">Start free trial</a>
-      <small style="display:block;margin-top:10px;color:var(--muted)">Requires an Anthropic API key (pay-as-you-go, typically a few cents per comparison).</small>
+    <div class="price">
+      <div>
+        <h2>Buy it once</h2>
+        <p class="lede" style="margin-top:var(--s3)">Seven days free, no account. After that, one payment — no subscription, no seat counting.</p>
+        <ul>
+          <li>Unlimited comparisons and screen captures</li>
+          <li>All 1.x updates included</li>
+          <li>Runs on your Anthropic API key — comparisons stay on your Mac</li>
+        </ul>
+      </div>
+      <div class="right">
+        <div class="amount">$29<small>once</small></div>
+        <a class="btn accent" id="dl-price" href="downloads/Pickwise.dmg">Start the free trial</a>
+        <p class="fine">API usage is billed by Anthropic, typically a few cents per comparison.</p>
+      </div>
     </div>
   </section>
 
   <section id="download">
-    <div class="glass" style="text-align:center;padding:var(--s-xl)">
-      <h2>Download WhosBetter</h2>
-      <p class="sub">Universal binary · macOS 13 Ventura or later · Signed &amp; notarized</p>
-      <a class="btn primary" id="download-main" href="downloads/WhosBetter.dmg">⬇ Download WhosBetter.dmg</a>
-      <p class="mono" id="version" style="margin-top:12px;font-size:12px;color:var(--muted)">v1.0.0</p>
+    <div class="dl">
+      <div>
+        <h2>Download Pickwise</h2>
+        <p class="muted" style="margin-top:var(--s2)">Universal binary · macOS 13 Ventura or later · Developer ID signed, notarized, stapled.</p>
+      </div>
+      <div style="display:grid;gap:var(--s2);justify-items:end">
+        <a class="btn accent" id="dl-main" href="downloads/Pickwise.dmg">Download Pickwise.dmg</a>
+        <span class="meta" id="version">v1.0.0</span>
+      </div>
     </div>
   </section>
 
-  <footer>© 2026 Meet Jethwa · <a href="mailto:meetjethwa3@gmail.com">Support</a> · Not affiliated with any product shown.</footer>
+  <footer>
+    <span>© 2026 Meet Jethwa</span>
+    <span><a href="mailto:meetjethwa3@gmail.com">Support</a> · Product names belong to their owners; Pickwise has no affiliate links.</span>
+  </footer>
 </div>
 <script>
-// Keep the version label + links in sync with version.json (same file the app's updater reads).
+// Keep download links + version label in sync with version.json (the same feed the app's updater reads).
 fetch('version.json',{cache:'no-store'}).then(r=>r.json()).then(v=>{
-  document.getElementById('version').textContent='v'+v.version+' (build '+v.build+')';
-  for(const id of ['download-hero','download-main']){document.getElementById(id).href=v.url}
+  document.getElementById('version').textContent='v'+v.version+' · build '+v.build;
+  for(const id of ['dl-nav','dl-hero','dl-price','dl-main']) document.getElementById(id).href=v.url;
 }).catch(()=>{});
 </script>
 </body>
