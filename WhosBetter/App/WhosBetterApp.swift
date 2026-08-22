@@ -8,9 +8,10 @@ struct WhosBetterApp: App {
         WindowGroup {
             RootView()
                 .environmentObject(store)
-                .frame(minWidth: 900, minHeight: 600)
+                .frame(minWidth: 900, idealWidth: 1240, minHeight: 600, idealHeight: 1000)
         }
         .windowStyle(.hiddenTitleBar)
+        .defaultSize(width: 1240, height: 1000)
         .commands {
             CommandGroup(replacing: .newItem) {
                 Button("New Comparison") { store.newComparison() }.keyboardShortcut("n")

@@ -13,8 +13,12 @@ final class AppStore: ObservableObject {
     let license = LicenseManager.shared
 
     init() {
-        do { comparisons = try HistoryStore.load() }
-        catch { self.error = AppError("Couldn't load history", error: error) }
+        if SampleData.isDemo {
+            comparisons = [SampleData.comparison]
+        } else {
+            do { comparisons = try HistoryStore.load() }
+            catch { self.error = AppError("Couldn't load history", error: error) }
+        }
         if comparisons.isEmpty { newComparison() } else { selectedID = comparisons.first?.id }
         Task { await checkForUpdate() }
     }
@@ -35,6 +39,7 @@ final class AppStore: ObservableObject {
     }
 
     func persist() {
+        if SampleData.isDemo { return }
         do { try HistoryStore.save(comparisons) }
         catch { self.error = AppError("Couldn't save history", error: error) }
     }

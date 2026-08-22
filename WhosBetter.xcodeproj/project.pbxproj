@@ -21,6 +21,7 @@
 		9BC05D52C6A26195306E1DB1 /* ClaudeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4102B861C4F90183B5493763 /* ClaudeService.swift */; };
 		9CF333FB7AEAADCF7699DE3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 774784B18E7C242FAC5E9A79 /* Assets.xcassets */; };
 		B7090379D5A09631568A1A9E /* ScreenCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C294A01C6E71EBB5A77E50CC /* ScreenCapture.swift */; };
+		B7122AEB2974EE513A13BB2D /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3642EC8B49FD8117C4C3F130 /* SampleData.swift */; };
 		CD0E6A6F4A884A7EBAA1D4D1 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F8EA7B69558CF162F17B04 /* AppError.swift */; };
 		D4E8AA8430E6588006A978FE /* Comparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E40F5F28E082EAF47BEDF0 /* Comparison.swift */; };
 		F48368A51E9457E5976C778F /* UpdateChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2FCC7ECE81F4CC9C89EB95 /* UpdateChecker.swift */; };
@@ -29,6 +30,7 @@
 /* Begin PBXFileReference section */
 		105F0DEFC46D99E857E0EFFC /* SheetsAndSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetsAndSettings.swift; sourceTree = "<group>"; };
 		2D0397146EF2D227ABA6955E /* LicenseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseManager.swift; sourceTree = "<group>"; };
+		3642EC8B49FD8117C4C3F130 /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		40A8F73678844D9F717D690D /* PolarConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarConfig.swift; sourceTree = "<group>"; };
 		4102B861C4F90183B5493763 /* ClaudeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeService.swift; sourceTree = "<group>"; };
 		5E1E81A85C218BF69FA2A7CD /* WhosBetter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WhosBetter.entitlements; sourceTree = "<group>"; };
@@ -53,6 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				C4E40F5F28E082EAF47BEDF0 /* Comparison.swift */,
+				3642EC8B49FD8117C4C3F130 /* SampleData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -170,6 +173,7 @@
 				TargetAttributes = {
 					213ECBA1BF05263A1913CA8E = {
 						DevelopmentTeam = C9NLF34677;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -220,6 +224,7 @@
 				1F04DA8232A5A25E68BCEB66 /* PolarConfig.swift in Sources */,
 				5020D57312AA1EB16164EA89 /* ResultView.swift in Sources */,
 				7FAD4AE4E1ABC5FE560FE89F /* RootView.swift in Sources */,
+				B7122AEB2974EE513A13BB2D /* SampleData.swift in Sources */,
 				B7090379D5A09631568A1A9E /* ScreenCapture.swift in Sources */,
 				592CE0903B5A828D8DC03C13 /* SheetsAndSettings.swift in Sources */,
 				F48368A51E9457E5976C778F /* UpdateChecker.swift in Sources */,
@@ -235,8 +240,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = WhosBetter/WhosBetter.entitlements;
-				CODE_SIGN_IDENTITY = "-";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;

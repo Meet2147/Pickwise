@@ -23,6 +23,13 @@ struct RootView: View {
         .toolbar { ToolbarItem(placement: .primaryAction) { TrialBadge() } }
         .sheet(item: $store.error) { ErrorSheet(error: $0) }
         .sheet(isPresented: $store.showPaywall) { PaywallView() }
+        .onAppear {
+            if SampleData.isDemo {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    NSApp.windows.first?.setFrame(NSRect(x: 200, y: 40, width: 1240, height: 1000), display: true)
+                }
+            }
+        }
     }
 }
 

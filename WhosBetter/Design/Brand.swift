@@ -9,12 +9,20 @@ enum Brand {
         static let accent = SwiftUI.Color(red: 0.29, green: 0.87, blue: 1.00)
         /// Secondary accent — orchid magenta (used in gradients + the verdict glow).
         static let accent2 = SwiftUI.Color(red: 0.80, green: 0.45, blue: 1.00)
-        /// Success / "winner" green.
-        static let win = SwiftUI.Color(red: 0.44, green: 0.93, blue: 0.68)
+        /// Success / "winner" green (adaptive: deeper in light mode for contrast).
+        static let win = adaptive(light: (0.05, 0.55, 0.32), dark: (0.44, 0.93, 0.68))
         /// Warning / cons amber.
-        static let warn = SwiftUI.Color(red: 1.00, green: 0.72, blue: 0.40)
+        static let warn = adaptive(light: (0.72, 0.42, 0.00), dark: (1.00, 0.72, 0.40))
         /// Danger.
-        static let danger = SwiftUI.Color(red: 1.00, green: 0.45, blue: 0.50)
+        static let danger = adaptive(light: (0.78, 0.15, 0.22), dark: (1.00, 0.45, 0.50))
+
+        private static func adaptive(light: (Double, Double, Double), dark: (Double, Double, Double)) -> SwiftUI.Color {
+            SwiftUI.Color(nsColor: NSColor(name: nil) { app in
+                let isDark = app.bestMatch(from: [.aqua, .darkAqua]) == .darkAqua
+                let c = isDark ? dark : light
+                return NSColor(red: c.0, green: c.1, blue: c.2, alpha: 1)
+            })
+        }
 
         /// Aurora background stops (dark appearance).
         static let bgDarkTop = SwiftUI.Color(red: 0.06, green: 0.07, blue: 0.16)
