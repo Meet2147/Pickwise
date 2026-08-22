@@ -49,18 +49,17 @@ BIN="$APP/Contents/MacOS/$APP_NAME"
 lipo -archs "$BIN" | grep -q "x86_64" && lipo -archs "$BIN" | grep -q "arm64" || die "Not universal: $(lipo -archs "$BIN")"
 echo "archs: $(lipo -archs "$BIN")"
 
-notarize(){ # $1=path $2=json
+notarize(){ # $1=upload path $2=json $3=staple target
   [ "$SKIP_NOTARIZE" = 1 ] && { echo "(skipped: SKIP_NOTARIZE=1)"; return 0; }
   xcrun notarytool submit "$1" --keychain-profile "$NOTARY_PROFILE" --wait --output-format json > "$2" \
     || { ID=$(python3 -c "import json;print(json.load(open('$2')).get('id',''))" 2>/dev/null); [ -n "$ID" ] && xcrun notarytool log "$ID" --keychain-profile "$NOTARY_PROFILE"; die "Notarization of $1 failed"; }
   grep -q '"status": *"Accepted"' "$2" || { cat "$2"; die "Notarization of $1 not Accepted"; }
-  xcrun stapler staple "$1"
+  xcrun stapler staple "$3"
 }
 
 log "Notarizing .app"
 ditto -c -k --keepParent "$APP" "$DIST/$APP_NAME.zip"
-notarize "$DIST/$APP_NAME.zip" "$DIST/notary-app.json"
-[ "$SKIP_NOTARIZE" = 1 ] || xcrun stapler staple "$APP"
+notarize "$DIST/$APP_NAME.zip" "$DIST/notary-app.json" "$APP"
 
 log "Building DMG"
 create-dmg --volname "$APP_NAME" --window-size 540 380 --icon-size 128 \
@@ -70,7 +69,7 @@ create-dmg --volname "$APP_NAME" --window-size 540 380 --icon-size 128 \
 
 log "Signing + notarizing DMG"
 codesign --force --timestamp --sign "$SIGN_ID" "$DMG"
-notarize "$DMG" "$DIST/notary-dmg.json"
+notarize "$DMG" "$DIST/notary-dmg.json" "$DMG"
 
 log "Gatekeeper verification"
 spctl -a -t open --context context:primary-signature -vv "$DMG" 2>&1 | tee "$DIST/spctl.txt" || true
