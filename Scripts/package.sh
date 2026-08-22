@@ -10,7 +10,7 @@ VERSION="${1:-$(sed -n 's/.*MARKETING_VERSION: "\(.*\)"/\1/p' project.yml)}"
 BUILD="${2:-$(sed -n 's/.*CURRENT_PROJECT_VERSION: "\(.*\)"/\1/p' project.yml)}"
 NOTARY_PROFILE="${NOTARY_PROFILE:-PickwiseNotary}"       # keychain profile name; password never in repo
 SIGN_ID="${SIGN_ID:-Developer ID Application: Meet Jethwa (C9NLF34677)}"
-SITE_URL="${SITE_URL:-https://pickwise.app}"
+SITE_URL="${SITE_URL:-https://pickwise-m7az.onrender.com}"
 
 DIST="dist"; ARCHIVE="$DIST/$APP_NAME.xcarchive"; EXPORT="$DIST/export"
 APP="$EXPORT/$APP_NAME.app"; DMG="$DIST/$APP_NAME-$VERSION.dmg"

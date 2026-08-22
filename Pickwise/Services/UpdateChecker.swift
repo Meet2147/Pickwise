@@ -9,7 +9,7 @@ struct UpdateInfo: Decodable, Equatable {
 }
 
 enum UpdateChecker {
-    static let feedURL = URL(string: "https://pickwise.app/version.json")!
+    static let feedURL = URL(string: "https://pickwise-m7az.onrender.com/version.json")!
 
     static var currentBuild: Int {
         Int(Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "0") ?? 0

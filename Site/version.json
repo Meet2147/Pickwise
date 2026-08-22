@@ -1,6 +1,6 @@
 {
-  "build": 1,
+  "build": 2,
   "version": "1.0.0",
-  "url": "https://pickwise.app/downloads/Pickwise-1.0.0.dmg",
-  "notes": "Initial release."
+  "url": "https://pickwise-m7az.onrender.com/downloads/Pickwise-1.0.0.dmg",
+  "notes": "Update feed now points at the live site."
 }
