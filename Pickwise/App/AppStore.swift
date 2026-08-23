@@ -46,17 +46,20 @@ final class AppStore: ObservableObject {
 
     func runComparison() async {
         guard let i = selectedIndex else { return }
-        guard license.isUnlocked else { showPaywall = true; return }
         isComparing = true
         defer { isComparing = false }
         let id = comparisons[i].id
         do {
-            let result = try await ClaudeService().compare(comparisons[i].candidates)
+            let r = try await PickwiseAPI().compare(comparisons[i].candidates)
+            license.apply(r.quota)
             if let j = comparisons.firstIndex(where: { $0.id == id }) {
-                comparisons[j].result = result
+                comparisons[j].result = r.result
                 comparisons[j].createdAt = Date()
                 persist()
             }
+        } catch let q as PickwiseAPI.QuotaExhausted {
+            license.apply(.init(plan: q.code == "free_exhausted" ? "free" : "pro", used: q.used, limit: q.limit))
+            showPaywall = true
         } catch let e as AppError {
             error = e
         } catch {

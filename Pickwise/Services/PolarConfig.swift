@@ -1,9 +1,11 @@
 import Foundation
 
 /// Public, non-secret Polar identifiers. Safe to commit.
-/// (Polar's customer-portal license endpoints are gated by organization ID only.)
 enum PolarConfig {
-    static let organizationID = ""   // TODO: set to your Polar organization ID
-    static let checkoutURL = ""      // TODO: set to your Polar checkout link
-    static let price = "$29"
+    static let organizationID = ""   // TODO: Polar organization ID (also set POLAR_ORG_ID on the server)
+    static let checkoutURL = ""      // TODO: Polar checkout link for the Pickwise Pro subscription
+    static let price = "$5.99"
+    static let period = "month"
+    static let freeComparisons = 5
+    static let monthlyComparisons = 50
 }

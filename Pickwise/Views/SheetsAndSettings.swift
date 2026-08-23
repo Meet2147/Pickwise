@@ -76,28 +76,32 @@ struct PaywallView: View {
             Ground()
             Surface(emphasis: true, padding: Brand.Space.l) {
                 VStack(alignment: .leading, spacing: Brand.Space.m) {
-                    Text("Unlock Pickwise").font(Brand.Font.hero)
-                    Text(headline).font(Brand.Font.body).foregroundStyle(.secondary)
-                    HStack(alignment: .firstTextBaseline, spacing: 4) {
+                    Text("Pickwise Pro").font(Brand.Font.hero)
+                    Text(headline).font(Brand.Font.body).foregroundStyle(Brand.Color.ink2)
+                    HStack(alignment: .firstTextBaseline, spacing: 6) {
                         Text(PolarConfig.price).font(Brand.Font.hero)
-                        Text("one-time · yours forever").font(Brand.Font.caption).foregroundStyle(.secondary)
+                        Text("per \(PolarConfig.period) · \(PolarConfig.monthlyComparisons) comparisons · cancel anytime")
+                            .font(Brand.Font.caption).foregroundStyle(Brand.Color.ink2)
                     }
-                    Button("Buy a license") { lic.openCheckout() }.buttonStyle(PillButtonStyle(role: .primary))
-                    Divider()
-                    Text("Already have a key?").font(Brand.Font.headline)
-                    HStack {
-                        TextField("XXXX-XXXX-XXXX-XXXX", text: $key).textFieldStyle(.plain).font(Brand.Font.mono).field()
-                        Button(busy ? "Activating…" : "Activate") {
-                            busy = true
-                            Task { await lic.activate(key: key); busy = false
-                                   if case .licensed = lic.state { dismiss() } }
-                        }.buttonStyle(PillButtonStyle()).disabled(busy || key.isEmpty)
+                    if !lic.isPro {
+                        Button("Subscribe") { lic.openCheckout() }.buttonStyle(PillButtonStyle(role: .primary))
+                        Text("You'll get a subscription key by email. Paste it below.").font(Brand.Font.caption).foregroundStyle(Brand.Color.ink3)
+                        Divider().overlay(Brand.Color.hairline)
+                        Text("Have a key?").font(Brand.Font.headline)
+                        HStack {
+                            TextField("XXXX-XXXX-XXXX-XXXX", text: $key).textFieldStyle(.plain).font(Brand.Font.mono).field()
+                            Button(busy ? "Activating…" : "Activate") {
+                                busy = true
+                                Task { await lic.activate(key: key); busy = false
+                                       if lic.isPro { dismiss() } }
+                            }.buttonStyle(PillButtonStyle()).disabled(busy || key.isEmpty)
+                        }
                     }
                     if let e = lic.lastError {
                         Text(e.title).font(Brand.Font.caption).foregroundStyle(Brand.Color.danger)
                         if !e.details.isEmpty { Text(e.details).font(Brand.Font.mono).textSelection(.enabled).lineLimit(4) }
                     }
-                    HStack { Spacer(); Button("Not now") { dismiss() }.buttonStyle(.plain).foregroundStyle(.secondary) }
+                    HStack { Spacer(); Button(lic.isPro ? "Done" : "Not now") { dismiss() }.buttonStyle(.plain).foregroundStyle(Brand.Color.ink2) }
                 }
             }
             .padding(Brand.Space.l)
@@ -107,9 +111,11 @@ struct PaywallView: View {
 
     private var headline: String {
         switch lic.state {
-        case .trial(let d): return "Your free trial has \(d) day\(d == 1 ? "" : "s") left. Unlock unlimited comparisons."
-        case .expired: return "Your 7-day trial has ended. Buy once, keep it forever."
-        case .licensed(let k): return "Licensed (\(k)). Thank you!"
+        case .free(let used, let limit):
+            return used >= limit ? "You've used your \(limit) free comparisons. Subscribe to keep going."
+                                 : "\(limit - used) of \(limit) free comparisons left. No account needed until then."
+        case .pro(let k, let used, let limit):
+            return "Subscribed (\(k)). \(used) of \(limit) comparisons used this month."
         }
     }
 }
@@ -117,11 +123,8 @@ struct PaywallView: View {
 // MARK: - Settings
 
 struct SettingsView: View {
+    @EnvironmentObject var store: AppStore
     @ObservedObject private var lic = LicenseManager.shared
-    @State private var apiKey = ClaudeService.apiKey ?? ""
-    @State private var status = ""
-    @State private var statusOK = true
-    @State private var busy = false
 
     var body: some View {
         ZStack {
@@ -129,58 +132,31 @@ struct SettingsView: View {
             VStack(alignment: .leading, spacing: Brand.Space.m) {
                 Surface {
                     VStack(alignment: .leading, spacing: Brand.Space.s) {
-                        Text("Anthropic API key").font(Brand.Font.headline)
-                        Text("Comparisons run on Claude using your own key. The key is stored in your macOS Keychain and sent only to api.anthropic.com.")
-                            .font(Brand.Font.caption).foregroundStyle(.secondary)
-                        HStack {
-                            SecureField("sk-ant-…", text: $apiKey).textFieldStyle(.plain).font(Brand.Font.mono).field()
-                            Button(busy ? "Checking…" : "Save & test") { saveKey() }
-                                .buttonStyle(PillButtonStyle(role: .primary)).disabled(busy || apiKey.isEmpty)
+                        Text("Plan").font(Brand.Font.headline)
+                        switch lic.state {
+                        case .pro(let k, let used, let limit):
+                            Text("Pickwise Pro · \(k)").foregroundStyle(Brand.Color.win)
+                            Text("\(used) of \(limit) comparisons used this month.").font(Brand.Font.caption).foregroundStyle(Brand.Color.ink2)
+                            Button("Remove subscription key from this Mac") { lic.deactivateLocally() }.buttonStyle(PillButtonStyle())
+                        case .free(let used, let limit):
+                            Text("Free · \(max(0, limit - used)) of \(limit) comparisons left").foregroundStyle(Brand.Color.ink2)
+                            Button("Get Pickwise Pro") { store.showPaywall = true }.buttonStyle(PillButtonStyle(role: .primary))
                         }
-                        if !status.isEmpty {
-                            Text(status).font(Brand.Font.caption)
-                                .foregroundStyle(statusOK ? Brand.Color.win : Brand.Color.danger)
-                                .textSelection(.enabled)
-                        }
-                        Link("Get a key at console.anthropic.com", destination: URL(string: "https://console.anthropic.com/settings/keys")!)
-                            .font(Brand.Font.caption)
                     }.frame(maxWidth: .infinity, alignment: .leading)
                 }
                 Surface {
                     VStack(alignment: .leading, spacing: Brand.Space.s) {
-                        Text("License").font(Brand.Font.headline)
-                        switch lic.state {
-                        case .licensed(let k):
-                            Text("Licensed · \(k)").foregroundStyle(Brand.Color.win)
-                            Button("Remove license from this Mac") { lic.deactivateLocally() }.buttonStyle(PillButtonStyle())
-                        case .trial(let d):
-                            Text("Trial · \(d) days left").foregroundStyle(.secondary)
-                        case .expired:
-                            Text("Trial ended").foregroundStyle(Brand.Color.warn)
-                        }
+                        Text("Privacy").font(Brand.Font.headline)
+                        Text("Comparisons are sent to the Pickwise service, which runs the AI model and keeps no copy of your products or results. History is stored only on this Mac.")
+                            .font(Brand.Font.caption).foregroundStyle(Brand.Color.ink2)
+                        Text("Device id · \(PickwiseAPI.deviceID)").font(Brand.Font.monoSmall).foregroundStyle(Brand.Color.ink3).textSelection(.enabled)
                     }.frame(maxWidth: .infinity, alignment: .leading)
                 }
                 Text("Pickwise \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") ?? "") (\(UpdateChecker.currentBuild))")
-                    .font(Brand.Font.caption).foregroundStyle(.secondary)
+                    .font(Brand.Font.caption).foregroundStyle(Brand.Color.ink3)
             }
             .padding(Brand.Space.l)
         }
         .frame(width: 520)
-    }
-
-    private func saveKey() {
-        busy = true; status = ""
-        Task {
-            do {
-                try await ClaudeService().validateKey(apiKey)
-                try KeychainStore.set(apiKey, for: ClaudeService.apiKeyKeychainKey)
-                status = "Key works and is saved in Keychain."; statusOK = true
-            } catch let e as AppError {
-                status = "\(e.title)\n\(e.details.prefix(300))"; statusOK = false
-            } catch {
-                status = error.localizedDescription; statusOK = false
-            }
-            busy = false
-        }
     }
 }

@@ -82,12 +82,11 @@ struct TrialBadge: View {
     var body: some View {
         Group {
             switch lic.state {
-            case .trial(let d):
-                Button("Trial · \(d) days left") { store.showPaywall = true }
-            case .expired:
-                Button("Trial ended · Unlock") { store.showPaywall = true }.foregroundStyle(Brand.Color.warn)
-            case .licensed:
-                Text("Licensed").foregroundStyle(Brand.Color.ink2)
+            case .free(let used, let limit):
+                Button("Free · \(max(0, limit - used)) of \(limit) left") { store.showPaywall = true }
+                    .foregroundStyle(used >= limit ? Brand.Color.warn : .primary)
+            case .pro(_, let used, let limit):
+                Button("Pro · \(used)/\(limit) this month") { store.showPaywall = true }.foregroundStyle(Brand.Color.ink2)
             }
         }
         .font(Brand.Font.monoSmall)
