@@ -10,6 +10,9 @@ auth=(-H "Authorization: Bearer $POLAR_TOKEN" -H "Content-Type: application/json
 die(){ echo "✗ $*" >&2; exit 1; }
 post(){ curl -sS -X POST "${auth[@]}" "$API/$1" -d "$2"; }
 
+if [ -n "${BENEFIT_ID:-}" ]; then
+  echo "1/4 Reusing existing benefit $BENEFIT_ID"
+else
 echo "1/4 Creating license-key benefit…"
 BENEFIT=$(post "benefits/" '{
   "type": "license_keys",
@@ -18,8 +21,9 @@ BENEFIT=$(post "benefits/" '{
 }')
 BENEFIT_ID=$(echo "$BENEFIT" | python3 -c 'import json,sys;print(json.load(sys.stdin)["id"])') || die "benefit failed: $BENEFIT"
 echo "   benefit: $BENEFIT_ID"
+fi
 
-echo "2/4 Creating product Pickwise Pro ($5.99/month)…"
+echo '2/4 Creating product Pickwise Pro ($5.99/month)…'
 PRODUCT=$(post "products/" '{
   "name": "Pickwise Pro",
   "description": "50 AI product comparisons a month in the Pickwise Mac app. Cancel anytime.",
