@@ -35,11 +35,11 @@ YEARLY=$(post "products/" '{
 YEARLY_ID=$(echo "$YEARLY" | jid) || die "yearly failed: $YEARLY"
 echo "   yearly: $YEARLY_ID"
 
-echo '3/5 Creating Pickwise Pro Lifetime ($149 once)…'
+echo '3/5 Creating Pickwise Pro Lifetime ($99 once)…'
 LIFETIME=$(post "products/" '{
   "name": "Pickwise Pro — Lifetime",
   "description": "30 AI product comparisons a month in the Pickwise Mac app. Pay once, keep it forever.",
-  "prices": [ { "amount_type": "fixed", "price_currency": "usd", "price_amount": 14900 } ]
+  "prices": [ { "amount_type": "fixed", "price_currency": "usd", "price_amount": 9900 } ]
 }')
 LIFETIME_ID=$(echo "$LIFETIME" | jid) || die "lifetime failed: $LIFETIME"
 echo "   lifetime: $LIFETIME_ID"
