@@ -110,8 +110,11 @@ async function callAnthropic(content) {
     throw { status: r.status >= 500 || r.status === 529 ? 503 : 502, code: "upstream_error",
             message: err?.error?.message || `Upstream HTTP ${r.status}`, requestId: r.headers.get("request-id") };
   }
-  // Consume the SSE stream; collect the final text block and stop reason.
-  let text = "", stopReason = null, currentType = null, buf = "";
+  // Consume the SSE stream. Text blocks are accumulated PER BLOCK INDEX — the
+  // web-search tool interleaves several text blocks, so "last started block"
+  // bookkeeping corrupts the output (fragments like ",Ap]" survive).
+  const texts = new Map();   // block index -> accumulated text
+  let stopReason = null, buf = "";
   const dec = new TextDecoder();
   for await (const chunk of r.body) {
     buf += dec.decode(chunk, { stream: true });
@@ -121,15 +124,21 @@ async function callAnthropic(content) {
       const line = frame.split("\n").find(l => l.startsWith("data:"));
       if (!line) continue;
       let ev; try { ev = JSON.parse(line.slice(5)); } catch { continue; }
-      if (ev.type === "content_block_start") { currentType = ev.content_block?.type; if (currentType === "text") text = ""; }
-      else if (ev.type === "content_block_delta" && ev.delta?.type === "text_delta" && currentType === "text") text += ev.delta.text;
+      if (ev.type === "content_block_start" && ev.content_block?.type === "text") texts.set(ev.index, "");
+      else if (ev.type === "content_block_delta" && ev.delta?.type === "text_delta" && texts.has(ev.index)) texts.set(ev.index, texts.get(ev.index) + ev.delta.text);
       else if (ev.type === "message_delta") stopReason = ev.delta?.stop_reason || stopReason;
       else if (ev.type === "error") throw { status: 502, code: "upstream_error", message: ev.error?.message || "stream error" };
     }
   }
   if (stopReason === "refusal") throw { status: 422, code: "refused", message: "The model declined this request." };
   if (stopReason === "max_tokens") throw { status: 422, code: "truncated", message: "Response was cut off. Try fewer products or shorter inputs." };
-  let result; try { result = JSON.parse(text); } catch { throw { status: 502, code: "bad_json", message: "Couldn't parse the model's response." }; }
+  // The structured-output JSON is the last text block that parses as an object.
+  let result = null;
+  const ordered = [...texts.entries()].sort((a, b) => a[0] - b[0]).map(([, t]) => t.trim()).filter(Boolean);
+  for (const t of ordered.reverse()) {
+    try { const p = JSON.parse(t); if (p && typeof p === "object") { result = p; break; } } catch {}
+  }
+  if (!result) throw { status: 502, code: "bad_json", message: "Couldn't parse the model's response." };
   const n = result.products.length;
   result.products = result.products.map(p => ({ ...p, score: Math.min(100, Math.max(0, p.score | 0)) }));
   result.table = result.table.map(row => {
