@@ -22,8 +22,11 @@ die(){ printf '\033[1;31m✗ %s\033[0m\n' "$*" >&2; exit 1; }
 command -v xcodegen >/dev/null || die "xcodegen missing (brew install xcodegen)"
 command -v create-dmg >/dev/null || die "create-dmg missing (brew install create-dmg)"
 SKIP_NOTARIZE="${SKIP_NOTARIZE:-0}"   # 1 = local dry run (no notarization, no staple, no publish)
-[ "$SKIP_NOTARIZE" = 1 ] || xcrun notarytool history --keychain-profile "$NOTARY_PROFILE" >/dev/null 2>&1 \
-  || die "Notary profile '$NOTARY_PROFILE' not found. Create it once with: xcrun notarytool store-credentials \"$NOTARY_PROFILE\" --apple-id <email> --team-id C9NLF34677 --password <app-specific-password>"
+if [ "$SKIP_NOTARIZE" != 1 ]; then
+  NOTARY_CHECK=$(xcrun notarytool history --keychain-profile "$NOTARY_PROFILE" 2>&1 >/dev/null) \
+    || die "Notary credential check failed for profile '$NOTARY_PROFILE': $NOTARY_CHECK
+Recreate it with: xcrun notarytool store-credentials \"$NOTARY_PROFILE\" --apple-id <email> --team-id C9NLF34677 --password <app-specific-password>"
+fi
 
 rm -rf "$DIST"; mkdir -p "$DIST"
 
