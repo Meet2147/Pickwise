@@ -113,6 +113,19 @@ nav .btn{padding:8px 16px;font-size:13px}
 .demo{padding:24px}
 .demo video{width:100%;border:1px solid var(--hair-2);border-radius:12px;display:block;background:#000}
 
+/* iOS coming soon */
+.ios{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:1px;background:var(--hair)}
+.ios .cell{display:flex;flex-direction:column;justify-content:center}
+.pulse{display:inline-flex;align-items:center;gap:10px;font:500 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+.pulse i{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(74,221,255,.45)}50%{box-shadow:0 0 0 9px rgba(74,221,255,0)}}
+.phoneWrap{display:flex;justify-content:center;padding:56px 24px 0;overflow:hidden}
+.phone{width:min(290px,70%);border:1px solid var(--hair-2);border-bottom:0;border-radius:44px 44px 0 0;padding:10px 10px 0;background:#050507;
+  box-shadow:0 30px 80px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.08);
+  animation:floaty 7s ease-in-out infinite}
+.phone img{border-radius:34px 34px 0 0;display:block}
+@keyframes floaty{0%,100%{transform:translateY(10px)}50%{transform:translateY(-8px)}}
+
 /* pricing */
 .price .cell{padding:56px 48px}
 .price .amount{font:600 64px/1 var(--display);letter-spacing:-.04em;margin:18px 0 4px}
@@ -135,7 +148,7 @@ footer a:hover{color:var(--ink-2)}
 .rv.in{opacity:1;transform:none}
 
 @media (max-width:860px){
-  .c2,.c4{grid-template-columns:1fr}
+  .c2,.c4,.ios{grid-template-columns:1fr}
   .cell{padding:40px 24px}
   nav .links{display:none}
   .hero .inner{padding:64px 16px}
@@ -216,6 +229,18 @@ footer a:hover{color:var(--ink-2)}
   <div class="row" id="demo"><div class="cell demo rv" style="padding:24px">
     <video controls playsinline preload="metadata" poster="assets/screenshot-verdict.png"><source src="assets/demo.mp4" type="video/mp4"></video>
   </div></div>
+
+  <div class="row ios" id="ios">
+    <div class="cell rv">
+      <span class="pulse"><i></i>In the works</span>
+      <h2 style="margin-top:14px">Pickwise is coming to iPhone.</h2>
+      <p class="sub" style="text-align:left;margin:12px 0 0;max-width:44ch">Same verdicts, soft new look — snap a photo of a product and compare on the spot. Your first five comparisons will be free there too.</p>
+      <p style="margin-top:22px;font:500 12px var(--mono);color:var(--ink-3)">UNTIL THEN, IT'S ON YOUR MAC ↓</p>
+    </div>
+    <div class="cell rv phoneWrap" style="padding-bottom:0">
+      <div class="phone"><img src="assets/ios-preview.png" alt="Pickwise for iPhone — early preview of the verdict screen" loading="lazy" width="360" height="780"></div>
+    </div>
+  </div>
 
   <div class="row c2 price" id="pricing">
     <div class="cell rv">
