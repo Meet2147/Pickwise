@@ -21,21 +21,23 @@
 		5E28A3194C0893D369930C5F /* UpdateChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5516003FDDEE9378C1EB1CC0 /* UpdateChecker.swift */; };
 		61EA16592170E8AAE0A1AF0B /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9F7C0CE4804A1282DD9A9C /* AppError.swift */; };
 		66882DB5D5E663704B05CDC7 /* Brand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3601653F31F1D747B53AAA /* Brand.swift */; };
+		6808D6F01B7FB4B2F401580A /* NeuTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA478FEECF25460081D1770 /* NeuTheme.swift */; };
 		69DB01FB97838554401D6FD8 /* LicenseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03C3FFE76FA4FA32180DCA5 /* LicenseManager.swift */; };
 		6EEDCBA96E60CE90F73D59AA /* PickwiseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAEF8B3EB9ECE0FBA11C1F2 /* PickwiseApp.swift */; };
 		73F35B2606981302D081041E /* PickwiseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46FF349B3145697768379EF /* PickwiseAPI.swift */; };
+		7CB2628AEE242F252EAA84E8 /* MobileResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215F4E8B90FE5312112A5932 /* MobileResultView.swift */; };
 		816572222022F82D8BDF58A3 /* HistoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A595E74938680FB01B7156 /* HistoryStore.swift */; };
-		87389B17316D0E54DC9D2CBB /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8934C7411C2EEEA5A17328F /* ResultView.swift */; };
+		8557FAF24C6B8F6A162FF75F /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534662743057AA275E1A76D1 /* OnboardingView.swift */; };
 		9008AAD97B2889320D0FC4E6 /* ComparisonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B3721B244FAA21B7A80D5A /* ComparisonView.swift */; };
 		9549220A3ED4D0AC9CA179A2 /* PickwiseMobileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36ACEECA90E144AAA49B8EE5 /* PickwiseMobileApp.swift */; };
 		97BD7E0D007D909FA9B5002C /* PolarConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022DA0EC1AEF6A7F56D77CDD /* PolarConfig.swift */; };
 		99EABCC750421358DE20014C /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9F7C0CE4804A1282DD9A9C /* AppError.swift */; };
 		9E58C7466DDB420140B9ADB1 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D941407BCB70275EB70BFFB0 /* AppStore.swift */; };
-		9FB614AA31C71F7D2FB556C2 /* Brand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3601653F31F1D747B53AAA /* Brand.swift */; };
 		D05CFA3E5D9B9501CEBEB9C3 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DF5DD811DEECBBCB792498 /* RootView.swift */; };
 		D12C8314488CF89826F8B426 /* PickwiseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46FF349B3145697768379EF /* PickwiseAPI.swift */; };
 		D394BF341A2DF6AEB63393A5 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BF9F932D9BCCE3801AE228 /* SampleData.swift */; };
 		E4D0B13F9FDA54F6825395BA /* KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CC9AC1427A227364CF0656 /* KeychainStore.swift */; };
+		E669B418214DDA000AF39360 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E443F5CAAC8F7DAB55804DD9 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,18 +45,21 @@
 		04A595E74938680FB01B7156 /* HistoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryStore.swift; sourceTree = "<group>"; };
 		0582E96DC68B22F263DFC8E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		1409CEDCACE7EF8DF69A589C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		215F4E8B90FE5312112A5932 /* MobileResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileResultView.swift; sourceTree = "<group>"; };
 		2A3601653F31F1D747B53AAA /* Brand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brand.swift; sourceTree = "<group>"; };
 		36ACEECA90E144AAA49B8EE5 /* PickwiseMobileApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickwiseMobileApp.swift; sourceTree = "<group>"; };
 		39BF9F932D9BCCE3801AE228 /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		3EAEF8B3EB9ECE0FBA11C1F2 /* PickwiseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickwiseApp.swift; sourceTree = "<group>"; };
 		44B3721B244FAA21B7A80D5A /* ComparisonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonView.swift; sourceTree = "<group>"; };
 		4F3FF07D97BE1E4A29B696FD /* MobileRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileRootView.swift; sourceTree = "<group>"; };
+		534662743057AA275E1A76D1 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		5516003FDDEE9378C1EB1CC0 /* UpdateChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateChecker.swift; sourceTree = "<group>"; };
 		5E9F7C0CE4804A1282DD9A9C /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		66C9659F4654479C006B3911 /* Pickwise.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pickwise.entitlements; sourceTree = "<group>"; };
 		71A3BB8FAB3E4ABA7F4B64BD /* ReportExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportExporter.swift; sourceTree = "<group>"; };
 		7D52D9991E5B27B6F683B764 /* SheetsAndSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetsAndSettings.swift; sourceTree = "<group>"; };
 		8960D499E8D8CB451D4C7EE3 /* PickwiseMobile.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = PickwiseMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BA478FEECF25460081D1770 /* NeuTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeuTheme.swift; sourceTree = "<group>"; };
 		A03252D568336CD2C3954980 /* Comparison.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comparison.swift; sourceTree = "<group>"; };
 		A03C3FFE76FA4FA32180DCA5 /* LicenseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseManager.swift; sourceTree = "<group>"; };
 		BB24D53C6B51CD489F758609 /* ScreenCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenCapture.swift; sourceTree = "<group>"; };
@@ -62,6 +67,7 @@
 		D9CC9AC1427A227364CF0656 /* KeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStore.swift; sourceTree = "<group>"; };
 		DF92CE78A078FCE4407573A2 /* Pickwise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pickwise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3DF5DD811DEECBBCB792498 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		E443F5CAAC8F7DAB55804DD9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E8934C7411C2EEEA5A17328F /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		F46FF349B3145697768379EF /* PickwiseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickwiseAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -146,8 +152,12 @@
 		A158BEC06E88DBA943976813 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				E443F5CAAC8F7DAB55804DD9 /* Assets.xcassets */,
 				0582E96DC68B22F263DFC8E5 /* Info.plist */,
+				215F4E8B90FE5312112A5932 /* MobileResultView.swift */,
 				4F3FF07D97BE1E4A29B696FD /* MobileRootView.swift */,
+				9BA478FEECF25460081D1770 /* NeuTheme.swift */,
+				534662743057AA275E1A76D1 /* OnboardingView.swift */,
 				36ACEECA90E144AAA49B8EE5 /* PickwiseMobileApp.swift */,
 			);
 			path = iOS;
@@ -178,6 +188,7 @@
 			buildConfigurationList = 014944F8F71AB0C47942E3B8 /* Build configuration list for PBXNativeTarget "PickwiseMobile" */;
 			buildPhases = (
 				0879779978A6952D5B6B94CB /* Sources */,
+				E4CE61280EAFC8021F9DEF1B /* Resources */,
 			);
 			buildRules = (
 			);
@@ -256,6 +267,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E4CE61280EAFC8021F9DEF1B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E669B418214DDA000AF39360 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -264,14 +283,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				61EA16592170E8AAE0A1AF0B /* AppError.swift in Sources */,
-				9FB614AA31C71F7D2FB556C2 /* Brand.swift in Sources */,
 				5135D1D3800378365D4313F2 /* Comparison.swift in Sources */,
 				1F711A7C8053F38743D213AE /* HistoryStore.swift in Sources */,
 				4914D5167FAFDAFD43C9E5DA /* KeychainStore.swift in Sources */,
+				7CB2628AEE242F252EAA84E8 /* MobileResultView.swift in Sources */,
 				268BED6BBE4ADD7F935C4138 /* MobileRootView.swift in Sources */,
+				6808D6F01B7FB4B2F401580A /* NeuTheme.swift in Sources */,
+				8557FAF24C6B8F6A162FF75F /* OnboardingView.swift in Sources */,
 				73F35B2606981302D081041E /* PickwiseAPI.swift in Sources */,
 				9549220A3ED4D0AC9CA179A2 /* PickwiseMobileApp.swift in Sources */,
-				87389B17316D0E54DC9D2CBB /* ResultView.swift in Sources */,
 				D394BF341A2DF6AEB63393A5 /* SampleData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

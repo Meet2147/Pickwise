@@ -2,7 +2,7 @@ import Foundation
 
 /// One product the user wants compared. Either typed text (name/URL/pasted specs)
 /// or a screen capture PNG.
-struct Candidate: Identifiable, Codable, Equatable {
+struct Candidate: Identifiable, Codable, Equatable, Hashable {
     var id = UUID()
     var text: String = ""
     var imagePNG: Data? = nil
@@ -15,7 +15,7 @@ struct Candidate: Identifiable, Codable, Equatable {
     }
 }
 
-struct ProductAssessment: Codable, Identifiable, Equatable {
+struct ProductAssessment: Codable, Identifiable, Equatable, Hashable {
     var id: String { name }
     var name: String
     var summary: String
@@ -26,7 +26,7 @@ struct ProductAssessment: Codable, Identifiable, Equatable {
     var score: Int
 }
 
-struct CriterionRow: Codable, Identifiable, Equatable {
+struct CriterionRow: Codable, Identifiable, Equatable, Hashable {
     var id: String { criterion }
     var criterion: String
     /// One cell per product, same order as `products`.
@@ -35,7 +35,7 @@ struct CriterionRow: Codable, Identifiable, Equatable {
     var bestIndex: Int
 }
 
-struct Verdict: Codable, Equatable {
+struct Verdict: Codable, Equatable, Hashable {
     var winner: String
     var headline: String
     var reasoning: String
@@ -43,7 +43,7 @@ struct Verdict: Codable, Equatable {
     var caveats: [String]
 }
 
-struct ComparisonResult: Codable, Equatable {
+struct ComparisonResult: Codable, Equatable, Hashable {
     var title: String
     var products: [ProductAssessment]
     var table: [CriterionRow]
@@ -94,7 +94,7 @@ struct ComparisonResult: Codable, Equatable {
     ]
 }
 
-struct Comparison: Identifiable, Codable, Equatable {
+struct Comparison: Identifiable, Codable, Equatable, Hashable {
     var id = UUID()
     var createdAt = Date()
     var candidates: [Candidate] = [Candidate(), Candidate()]

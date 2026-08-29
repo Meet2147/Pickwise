@@ -24,8 +24,6 @@ targets:
     sources:
       - path: iOS
       - path: Pickwise/Models
-      - path: Pickwise/Design/Brand.swift
-      - path: Pickwise/Views/ResultView.swift
       - path: Pickwise/Services/AppError.swift
       - path: Pickwise/Services/KeychainStore.swift
       - path: Pickwise/Services/HistoryStore.swift
@@ -42,6 +40,7 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.meetjethwa.Pickwise.ios
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         CODE_SIGN_STYLE: Automatic
         TARGETED_DEVICE_FAMILY: "1"
   Pickwise:

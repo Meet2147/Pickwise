@@ -20,11 +20,17 @@ final class MobileStore: ObservableObject {
     @Published var showPaywall = false
 
     init() {
+        if SampleData.isDemo {
+            comparisons = [SampleData.comparison]
+            quota = .init(plan: "free", used: 1, limit: 5)
+            return
+        }
         do { comparisons = try HistoryStore.load() }
         catch { self.error = AppError("Couldn't load history", error: error) }
     }
 
     func persist() {
+        if SampleData.isDemo { return }
         do { try HistoryStore.save(comparisons) }
         catch { self.error = AppError("Couldn't save history", error: error) }
     }
