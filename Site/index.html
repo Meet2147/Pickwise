@@ -8,11 +8,11 @@
 <link rel="icon" href="assets/logo.png">
 <meta property="og:title" content="Pickwise — Which one should I buy?">
 <meta property="og:description" content="A Mac app that compares any products and tells you which to buy. 5 free comparisons, then $5.99/month.">
-<meta property="og:image" content="https://pickwise-m7az.onrender.com/assets/og.png">
+<meta property="og:image" content="https://pickwise.dashovia.app/assets/og.png">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://pickwise-m7az.onrender.com/">
+<meta property="og:url" content="https://pickwise.dashovia.app/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://pickwise-m7az.onrender.com/assets/og.png">
+<meta name="twitter:image" content="https://pickwise.dashovia.app/assets/og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,500;0,600;1,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
@@ -113,18 +113,23 @@ nav .btn{padding:8px 16px;font-size:13px}
 .demo{padding:24px}
 .demo video{width:100%;border:1px solid var(--hair-2);border-radius:12px;display:block;background:#000}
 
-/* iOS coming soon */
-.ios{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:1px;background:var(--hair)}
-.ios .cell{display:flex;flex-direction:column;justify-content:center}
-.pulse{display:inline-flex;align-items:center;gap:10px;font:500 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
-.pulse i{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(74,221,255,.45)}50%{box-shadow:0 0 0 9px rgba(74,221,255,0)}}
-.phoneWrap{display:flex;justify-content:center;padding:56px 24px 0;overflow:hidden}
-.phone{width:min(290px,70%);border:1px solid var(--hair-2);border-bottom:0;border-radius:44px 44px 0 0;padding:10px 10px 0;background:#050507;
-  box-shadow:0 30px 80px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.08);
-  animation:floaty 7s ease-in-out infinite}
-.phone img{border-radius:34px 34px 0 0;display:block}
-@keyframes floaty{0%,100%{transform:translateY(10px)}50%{transform:translateY(-8px)}}
+/* iOS coming soon — radar + waitlist */
+.ios{position:relative;text-align:center;padding:110px 24px;overflow:hidden}
+.radar{position:relative;width:120px;height:120px;margin:0 auto 30px}
+.radar .core{position:absolute;inset:0;display:grid;place-items:center;background:var(--cell-2);border:1px solid var(--hair-2);border-radius:32px;font-size:44px;line-height:1;color:var(--ink);box-shadow:0 18px 50px rgba(0,0,0,.5)}
+.radar .ring{position:absolute;inset:0;border:1px solid var(--accent);border-radius:40px;opacity:0;animation:ring 3.6s cubic-bezier(.2,.6,.3,1) infinite}
+.radar .ring:nth-child(2){animation-delay:1.2s}
+.radar .ring:nth-child(3){animation-delay:2.4s}
+@keyframes ring{0%{transform:scale(1);opacity:.55}80%{opacity:0}100%{transform:scale(2.6);opacity:0}}
+.ios h2{margin:0 auto}
+.ios .sub{max-width:46ch;margin:14px auto 34px}
+.wl{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.wl input{font:500 14px var(--body);color:var(--ink);background:rgba(255,255,255,.05);border:1px solid var(--hair-2);border-radius:999px;padding:12px 20px;width:min(320px,80vw);outline:none;transition:border-color .15s var(--ease)}
+.wl input::placeholder{color:var(--ink-3)}
+.wl input:focus{border-color:var(--accent)}
+.wl .msg{width:100%;margin-top:14px;font:500 12px var(--mono);letter-spacing:.04em;color:var(--ink-2);min-height:16px}
+.wl .msg.ok{color:var(--accent)}
+.wl .msg.err{color:#FF8A93}
 
 /* pricing */
 .price .cell{padding:56px 48px}
@@ -148,7 +153,7 @@ footer a:hover{color:var(--ink-2)}
 .rv.in{opacity:1;transform:none}
 
 @media (max-width:860px){
-  .c2,.c4,.ios{grid-template-columns:1fr}
+  .c2,.c4{grid-template-columns:1fr}
   .cell{padding:40px 24px}
   nav .links{display:none}
   .hero .inner{padding:64px 16px}
@@ -230,17 +235,17 @@ footer a:hover{color:var(--ink-2)}
     <video controls playsinline preload="metadata" poster="assets/screenshot-verdict.png"><source src="assets/demo.mp4" type="video/mp4"></video>
   </div></div>
 
-  <div class="row ios" id="ios">
-    <div class="cell rv">
-      <span class="pulse"><i></i>In the works</span>
-      <h2 style="margin-top:14px">Pickwise is coming to iPhone.</h2>
-      <p class="sub" style="text-align:left;margin:12px 0 0;max-width:44ch">Same verdicts, soft new look — snap a photo of a product and compare on the spot. Your first five comparisons will be free there too.</p>
-      <p style="margin-top:22px;font:500 12px var(--mono);color:var(--ink-3)">UNTIL THEN, IT'S ON YOUR MAC ↓</p>
-    </div>
-    <div class="cell rv phoneWrap" style="padding-bottom:0">
-      <div class="phone"><img src="assets/ios-preview.png" alt="Pickwise for iPhone — early preview of the verdict screen" loading="lazy" width="360" height="780"></div>
-    </div>
-  </div>
+  <div class="row"><div class="cell ios rv" id="ios">
+    <div class="radar" aria-hidden="true"><span class="ring"></span><span class="ring"></span><span class="ring"></span><div class="core"></div></div>
+    <span class="pulse" style="justify-content:center"><i></i>In the works</span>
+    <h2 style="margin-top:14px">Pickwise is coming to iPhone.</h2>
+    <p class="sub">Snap a photo of any product and get the verdict on the spot. Leave your email and you'll get exactly one message — when it ships.</p>
+    <form class="wl" id="wl">
+      <input type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+      <button class="btn accent" type="submit" id="wl-btn">Get notified</button>
+      <div class="msg" id="wl-msg" role="status"></div>
+    </form>
+  </div></div>
 
   <div class="row c2 price" id="pricing">
     <div class="cell rv">
@@ -285,6 +290,19 @@ fetch('version.json',{cache:'no-store'}).then(r=>r.json()).then(v=>{
   document.getElementById('version').textContent='V'+v.version+' · BUILD '+v.build;
   for(const id of ['dl-nav','dl-hero','dl-price','dl-main']) document.getElementById(id).href=v.url;
 }).catch(()=>{});
+document.getElementById('wl').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const btn=document.getElementById('wl-btn'),msg=document.getElementById('wl-msg');
+  const email=new FormData(e.target).get('email');
+  btn.disabled=true;msg.className='msg';msg.textContent='…';
+  try{
+    const r=await fetch('https://pickwise-api-3jv9.onrender.com/v1/waitlist',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({email})});
+    const d=await r.json();
+    if(r.ok){msg.className='msg ok';msg.textContent="YOU'RE ON THE LIST. ONE EMAIL, WHEN IT SHIPS.";e.target.reset();}
+    else{msg.className='msg err';msg.textContent=(d.message||'Something went wrong — try again.').toUpperCase();}
+  }catch{msg.className='msg err';msg.textContent='NETWORK HICCUP — TRY AGAIN IN A MOMENT.';}
+  btn.disabled=false;
+});
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 </script>

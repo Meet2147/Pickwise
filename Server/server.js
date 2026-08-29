@@ -149,9 +149,40 @@ async function callAnthropic(content) {
 }
 
 // ---- HTTP ----
+const CORS = {
+  "access-control-allow-origin": "*",
+  "access-control-allow-methods": "POST, OPTIONS",
+  "access-control-allow-headers": "content-type",
+};
+
 const server = http.createServer(async (req, res) => {
   try {
     if (req.method === "GET" && req.url === "/health") return json(res, 200, { ok: true, model: MODEL, redis: !!redis });
+
+    // iOS waitlist: POST {email} from the website. Stored as a Redis set.
+    if (req.method === "OPTIONS" && req.url === "/v1/waitlist") { res.writeHead(204, CORS); return res.end(); }
+    if (req.method === "POST" && req.url === "/v1/waitlist") {
+      let body; try { body = JSON.parse(await readBody(req, 4096)); } catch { return json(res, 400, { code: "bad_request" }, CORS); }
+      const email = String(body.email || "").trim().toLowerCase();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) || email.length > 254)
+        return json(res, 400, { code: "bad_email", message: "That doesn't look like an email address." }, CORS);
+      if (redis) {
+        const n = await redis.scard("waitlist");
+        if (n > 50000) return json(res, 503, { code: "full" }, CORS);
+        await redis.sadd("waitlist", email);
+      } else {
+        mem.set("waitlist:" + email, 1);
+      }
+      console.log("waitlist:", email);
+      return json(res, 200, { ok: true }, CORS);
+    }
+    // Export: GET /v1/waitlist?token=... (requires ADMIN_TOKEN env)
+    if (req.method === "GET" && req.url.startsWith("/v1/waitlist")) {
+      const token = new URL(req.url, "http://x").searchParams.get("token");
+      if (!process.env.ADMIN_TOKEN || token !== process.env.ADMIN_TOKEN) return json(res, 404, { code: "not_found" });
+      const emails = redis ? await redis.smembers("waitlist") : [...mem.keys()].filter(k => k.startsWith("waitlist:")).map(k => k.slice(9));
+      return json(res, 200, { count: emails.length, emails });
+    }
     if (req.method === "POST" && req.url === "/v1/compare") {
       let body; try { body = JSON.parse(await readBody(req)); } catch { return json(res, 400, { code: "bad_request", message: "Invalid JSON." }); }
       const { candidates, licenseKey, activationId, deviceId } = body;
