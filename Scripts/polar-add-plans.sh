@@ -13,12 +13,16 @@ post(){ curl -sS -X POST "${auth[@]}" "$API/$1" -d "$2"; }
 jid(){ python3 -c 'import json,sys;print(json.load(sys.stdin)["id"])'; }
 
 echo "1/5 Finding the existing monthly product…"
-MONTHLY_ID=$(curl -sS "${auth[@]}" "$API/products/?is_archived=false&limit=50" | python3 -c '
+LIST=$(curl -sS "${auth[@]}" "$API/products/?is_archived=false&limit=50")
+MONTHLY_ID=$(echo "$LIST" | python3 -c '
 import json,sys
-for p in json.load(sys.stdin)["items"]:
+d=json.load(sys.stdin)
+if "items" not in d:
+    sys.stderr.write("Polar said: %s\n" % json.dumps(d)); sys.exit(0)
+for p in d["items"]:
     if p.get("recurring_interval")=="month" and "Pickwise" in p["name"]:
         print(p["id"]); break')
-[ -n "$MONTHLY_ID" ] || die "Couldn't find the monthly Pickwise Pro product"
+[ -n "$MONTHLY_ID" ] || die "Couldn't find the monthly product. Polar response above — if it mentions scopes or authentication, recreate the token with products:read, products:write, benefits:write, checkout_links:write."
 echo "   monthly: $MONTHLY_ID"
 
 echo '2/5 Creating Pickwise Pro Yearly ($49.99/year)…'
