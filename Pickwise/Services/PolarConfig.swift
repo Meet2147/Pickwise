@@ -6,6 +6,6 @@ enum PolarConfig {
     static let checkoutURL = "https://buy.polar.sh/polar_cl_L0tIX7HRzlAE0Q3KzoqMQju5ZfDhSGXQOFxUA409HXp"
     static let price = "$5.99"
     static let period = "month"
-    static let freeComparisons = 5
-    static let monthlyComparisons = 50
+    static let freeComparisons = 3
+    static let monthlyComparisons = 30
 }

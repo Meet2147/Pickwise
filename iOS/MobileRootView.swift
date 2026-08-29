@@ -278,15 +278,15 @@ struct MobilePaywall: View {
         ZStack {
             Neu.bg.ignoresSafeArea()
             VStack(spacing: 20) {
-                Text("\(quota?.used ?? 5)/\(quota?.limit ?? 5)")
+                Text("\(quota?.used ?? 3)/\(quota?.limit ?? 3)")
                     .font(.system(size: 30, weight: .bold, design: .rounded)).foregroundStyle(Neu.accent)
                     .frame(width: 96, height: 96)
                     .neuInset(radius: 48)
                 Text("Free comparisons used").font(Neu.Font.title).foregroundStyle(Neu.ink)
-                Text("Pickwise Pro on iPhone is coming soon. Until then, Pro lives in the Mac app — 50 comparisons a month, $5.99.")
+                Text("Pickwise Pro on iPhone is coming soon. Until then, Pro lives in the Mac app — 30 comparisons a month, $5.99.")
                     .font(Neu.Font.body).foregroundStyle(Neu.ink2)
                     .multilineTextAlignment(.center)
-                Link("Get Pickwise for Mac", destination: URL(string: "https://pickwise-m7az.onrender.com")!)
+                Link("Get Pickwise for Mac", destination: URL(string: "https://pickwise.dashovia.app")!)
                     .buttonStyle(NeuButtonStyle(prominent: true))
                 Button("Not now") { dismiss() }.buttonStyle(NeuButtonStyle())
             }

@@ -1,6 +1,6 @@
 {
-  "build": 6,
+  "build": 7,
   "version": "1.0.0",
-  "url": "https://pickwise-m7az.onrender.com/downloads/Pickwise-1.0.0.dmg",
-  "notes": "Share any comparison as a PDF."
+  "url": "https://pickwise.dashovia.app/downloads/Pickwise-1.0.0.dmg",
+  "notes": "Updates now come from pickwise.dashovia.app."
 }

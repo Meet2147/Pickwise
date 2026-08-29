@@ -118,7 +118,7 @@ struct ReportView: View {
                 }
             }
             Divider().overlay(hairline)
-            Text("Made with Pickwise · pickwise-m7az.onrender.com")
+            Text("Made with Pickwise · pickwise.dashovia.app")
                 .font(.system(size: 9, design: .monospaced)).foregroundStyle(muted)
         }
         .padding(36)

@@ -31,14 +31,14 @@ struct OnboardingView: View {
                         text: "Type names, paste links or specs, or attach a photo of the product. Pickwise reads the web live and cites its sources.")
                         .tag(1)
                     OnboardPage(icon: { AnyView(
-                        Text("5")
+                        Text("3")
                             .font(.system(size: 46, weight: .bold, design: .rounded))
                             .foregroundStyle(Neu.accent)
                             .frame(width: 110, height: 110)
                             .neuInset(radius: 55)
                     )},
-                        title: "Five on the house",
-                        text: "Your first five comparisons are free — no account, nothing to set up. Each one takes about a minute of live research.")
+                        title: "Three on the house",
+                        text: "Your first three comparisons are free — no account, nothing to set up. Each one takes about a minute of live research.")
                         .tag(2)
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))

@@ -47,9 +47,9 @@ services:
       - key: POLAR_ORG_ID
         sync: false
       - key: FREE_LIMIT
-        value: "5"
+        value: "3"
       - key: MONTHLY_LIMIT
-        value: "50"
+        value: "30"
       - key: REDIS_URL
         fromService:
           type: keyvalue

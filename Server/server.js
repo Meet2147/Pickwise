@@ -7,9 +7,9 @@ import Redis from "ioredis";
 const PORT = process.env.PORT || 8787;
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
 const POLAR_ORG_ID = process.env.POLAR_ORG_ID || "";
-const FREE_LIMIT = Number(process.env.FREE_LIMIT || 5);
-const MONTHLY_LIMIT = Number(process.env.MONTHLY_LIMIT || 50);
-const MODEL = "claude-opus-5";
+const FREE_LIMIT = Number(process.env.FREE_LIMIT || 3);
+const MONTHLY_LIMIT = Number(process.env.MONTHLY_LIMIT || 30);
+const MODEL = "claude-sonnet-5";
 if (!ANTHROPIC_API_KEY) { console.error("ANTHROPIC_API_KEY is not set"); process.exit(1); }
 
 // ---- storage: Redis if configured, else in-memory (dev only; resets on restart) ----
@@ -97,7 +97,7 @@ async function callAnthropic(content) {
     model: MODEL, max_tokens: 16000, system: SYSTEM, stream: true,
     thinking: { type: "adaptive" },
     output_config: { effort: "high", format: { type: "json_schema", schema: SCHEMA } },
-    tools: [{ type: "web_search_20260209", name: "web_search", max_uses: 12 }],
+    tools: [{ type: "web_search_20260209", name: "web_search", max_uses: 8 }],
     messages: [{ role: "user", content }],
   };
   const r = await fetch("https://api.anthropic.com/v1/messages", {

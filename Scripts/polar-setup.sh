@@ -43,7 +43,7 @@ LINK=$(post "checkout-links/" '{
   "payment_processor": "stripe",
   "product_id": "'$PRODUCT_ID'",
   "label": "Pickwise Pro",
-  "success_url": "https://pickwise-m7az.onrender.com/?welcome=pro"
+  "success_url": "https://pickwise.dashovia.app/?welcome=pro"
 }')
 URL=$(echo "$LINK" | python3 -c 'import json,sys;print(json.load(sys.stdin)["url"])') || die "checkout link failed: $LINK"
 echo
