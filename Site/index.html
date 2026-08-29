@@ -15,248 +15,253 @@
 <meta name="twitter:image" content="https://pickwise-m7az.onrender.com/assets/og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,500;0,600;1,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
-/* ===== Pickwise site tokens — Raycast recipe, Pickwise accent ===== */
 :root{
-  --ground:#0F0F11; --surface:rgba(255,255,255,.06); --surface-2:rgba(255,255,255,.09);
-  --hair:rgba(255,255,255,.10); --hair-2:rgba(255,255,255,.18);
-  --ink:#FFFFFF; --ink-2:#B0B3B8; --ink-3:#74777E;
-  --accent:#4ADDFF; --accent-ink:#0B1B22;
-  --win:#70EDAD; --warn:#FFB866;
+  --ground:#0B0B0D; --cell:#0F0F11; --cell-2:#121215;
+  --hair:rgba(255,255,255,.08); --hair-2:rgba(255,255,255,.16);
+  --ink:#F4F5F7; --ink-2:#A6A9B3; --ink-3:#6B6E78;
+  --accent:#4ADDFF; --accent-ink:#0B1B22; --violet:#8B7CF6;
   --display:"Inter Tight",ui-sans-serif,system-ui,sans-serif;
   --body:"Inter",ui-sans-serif,system-ui,sans-serif;
   --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
-  --r-s:8px; --r-m:12px; --r-l:16px; --r-xl:24px;
-  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:40px; --s7:64px; --s8:112px;
-  --ease:cubic-bezier(.2,.8,.2,1); --spring:cubic-bezier(.34,1.4,.64,1);
+  --ease:cubic-bezier(.2,.8,.2,1);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{color-scheme:dark}
-body{background:var(--ground);color:var(--ink);font:500 15px/1.55 var(--body);-webkit-font-smoothing:antialiased;text-wrap:pretty;overflow-x:hidden}
+html{color-scheme:dark;scroll-behavior:smooth}
+body{background:var(--ground);color:var(--ink);font:400 15px/1.6 var(--body);-webkit-font-smoothing:antialiased;text-wrap:pretty}
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
-h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.02em;line-height:1.05}
-.wrap{max-width:1120px;margin:0 auto;padding:0 var(--s5)}
-p.lede{color:var(--ink-2);font-size:17px;line-height:1.6;max-width:52ch}
-.muted{color:var(--ink-2)}
+h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.02em;line-height:1.04}
 
-/* backdrop: soft-focused color band behind the hero only (recipe signature) */
-.backdrop{position:absolute;inset:0 0 auto 0;height:920px;z-index:-1;overflow:hidden;pointer-events:none}
-.backdrop::before{content:"";position:absolute;left:50%;top:-240px;width:1400px;height:760px;transform:translateX(-40%);border-radius:50%;
-  background:radial-gradient(closest-side,rgba(74,221,255,.38),transparent 70%),radial-gradient(closest-side at 70% 60%,rgba(204,115,255,.30),transparent 70%);filter:blur(80px)}
-.backdrop::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 55%,var(--ground))}
+/* ===== bordered grid shell: 1px hairline lines via gap trick ===== */
+.shell{max-width:1160px;margin:0 auto;border-left:1px solid var(--hair);border-right:1px solid var(--hair)}
+.row{display:grid;gap:1px;background:var(--hair);border-bottom:1px solid var(--hair)}
+.cell{background:var(--ground);padding:56px 48px}
+.c2{grid-template-columns:1fr 1fr}
+.c4{grid-template-columns:repeat(4,1fr)}
+.label{font:500 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.cell h3{font-size:19px;margin:2px 0 6px}
+.cell .sub{color:var(--ink-2);font-size:14px;max-width:44ch}
+.viz{margin-top:36px;display:flex;align-items:center;justify-content:center;min-height:180px}
 
-/* chips: keyboard shortcuts (recipe signature) */
-kbd{font:500 12px/1 var(--mono);color:var(--ink-2);background:var(--surface);border:1px solid var(--hair-2);border-radius:6px;padding:5px 7px;display:inline-block;min-width:26px;text-align:center}
-.kbdrow{display:inline-flex;gap:4px;align-items:center}
-
-/* buttons: translucent white pills, never solid bright fills */
-.btn{display:inline-flex;align-items:center;gap:var(--s3);font:600 14px var(--body);color:var(--ink);background:var(--surface-2);border:1px solid var(--hair-2);border-radius:999px;padding:11px 18px;
-  backdrop-filter:blur(12px);transition:background .15s var(--ease),transform .15s var(--ease),border-color .15s var(--ease)}
-.btn:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.28);transform:translateY(-1px)}
-.btn:active{transform:translateY(0) scale(.98)}
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;font:600 14px var(--body);color:var(--ink);background:rgba(255,255,255,.07);border:1px solid var(--hair-2);border-radius:999px;padding:11px 20px;transition:background .15s var(--ease),transform .15s var(--ease)}
+.btn:hover{background:rgba(255,255,255,.12);transform:translateY(-1px)}
 .btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-.btn.accent{background:var(--accent);color:var(--accent-ink);border-color:transparent}
+.btn.accent{background:var(--accent);border-color:transparent;color:var(--accent-ink)}
 .btn.accent:hover{background:#6EE5FF}
-.btn.accent kbd{color:var(--accent-ink);background:rgba(0,0,0,.10);border-color:rgba(0,0,0,.15)}
+kbd{font:500 11px/1 var(--mono);color:var(--ink-2);background:rgba(255,255,255,.06);border:1px solid var(--hair-2);border-radius:5px;padding:4px 6px}
 
-nav{display:flex;align-items:center;justify-content:space-between;height:72px}
-.brand{display:flex;align-items:center;gap:10px;font:600 16px var(--display);letter-spacing:-.01em}
-.brand img{width:28px;height:28px;border-radius:7px}
-nav .links{display:flex;gap:var(--s5);font-size:14px;color:var(--ink-2)}
+/* nav */
+nav{display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:64px;border-bottom:1px solid var(--hair)}
+.brand{display:flex;align-items:center;gap:10px;font:600 15px var(--display)}
+.brand img{width:26px;height:26px;border-radius:6px}
+nav .links{display:flex;gap:28px;font-size:13.5px;color:var(--ink-2)}
 nav .links a:hover{color:var(--ink)}
+nav .btn{padding:8px 16px;font-size:13px}
 
-/* hero: split; headline left, floating tilted app right */
-.hero{position:relative;padding:var(--s7) 0 var(--s7)}
-.hero .copy{max-width:720px}
-.hero h1{font-size:clamp(38px,4.6vw,58px);margin:var(--s4) 0 var(--s5)}
-.hero h1 em{font-style:normal;color:var(--accent)}
-.hero .cta{display:flex;gap:var(--s3);align-items:center;margin-top:var(--s5);flex-wrap:wrap}
-.hero .fine{margin-top:var(--s4);font-size:13px;color:var(--ink-3)}
-.hero .fine b{color:var(--ink-2);font-weight:500}
-.palette{position:relative;margin-top:var(--s7);max-height:620px;overflow:hidden;border-radius:var(--r-l) var(--r-l) 0 0;border:1px solid var(--hair-2);border-bottom:0;box-shadow:0 24px 60px rgba(0,0,0,.5)}
-.palette::after{content:"";position:absolute;inset:auto 0 0 0;height:160px;background:linear-gradient(transparent,var(--ground))}
-.palette img{width:100%;animation:settle .7s var(--ease) both}
-@keyframes settle{from{opacity:0;transform:translateY(24px)}}
-.platform{font:500 12px var(--mono);color:var(--ink-3);letter-spacing:.02em}
+/* ===== hero canvas ===== */
+.heroWrap{padding:24px}
+.hero{position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--hair-2);min-height:520px;display:flex;align-items:center;justify-content:center;text-align:center;isolation:isolate}
+.hero .glow{position:absolute;inset:-20%;z-index:-2;background:
+  radial-gradient(38% 45% at 32% 42%,rgba(74,221,255,.55),transparent 68%),
+  radial-gradient(42% 50% at 68% 60%,rgba(139,124,246,.45),transparent 70%),
+  radial-gradient(30% 36% at 55% 30%,rgba(255,255,255,.10),transparent 70%),
+  #0A0A0F;filter:blur(46px);animation:drift 16s ease-in-out infinite alternate}
+@keyframes drift{from{transform:translate3d(-2%,-1%,0) scale(1)}to{transform:translate3d(2%,2%,0) scale(1.06)}}
+.hero .dots{position:absolute;inset:0;z-index:-1;background-image:radial-gradient(rgba(255,255,255,.34) 1px,transparent 1.4px);background-size:9px 9px;mix-blend-mode:overlay;
+  -webkit-mask-image:radial-gradient(70% 85% at 50% 45%,#000 30%,transparent 78%);mask-image:radial-gradient(70% 85% at 50% 45%,#000 30%,transparent 78%)}
+.hero .vig{position:absolute;inset:0;z-index:-1;background:radial-gradient(120% 120% at 50% 50%,transparent 55%,rgba(0,0,0,.55))}
+.hero .inner{padding:88px 24px;max-width:660px}
+.hero .pill{display:inline-flex;align-items:center;gap:8px;font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);border:1px solid var(--hair-2);border-radius:999px;padding:7px 14px;background:rgba(0,0,0,.35);backdrop-filter:blur(8px)}
+.hero .pill i{width:6px;height:6px;border-radius:50%;background:var(--accent);display:inline-block}
+.hero h1{font-size:clamp(38px,5vw,58px);margin:22px 0 14px;text-shadow:0 2px 40px rgba(0,0,0,.5)}
+.hero h1 em{font-style:italic;font-weight:600}
+.hero p{color:var(--ink-2);font-size:16.5px;max-width:46ch;margin:0 auto 28px}
+.hero small{display:block;margin-top:16px;font:500 11px var(--mono);letter-spacing:.06em;color:var(--ink-3)}
 
-/* sections */
-section{padding:var(--s8) 0;border-top:1px solid var(--hair)}
-section h2{font-size:clamp(28px,3.4vw,40px);max-width:20ch}
-.split{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:var(--s6);align-items:start}
-.split .sticky{position:sticky;top:var(--s6)}
+/* app window band */
+.appband{padding:0 24px 24px}
+.appband .frame{border:1px solid var(--hair-2);border-radius:12px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.55)}
+.appband img{width:100%}
 
-/* how it works: numbered vertical narrative with real UI */
-.steps{display:grid;gap:var(--s7)}
-.step{display:grid;grid-template-columns:56px 1fr;gap:var(--s4);align-items:start}
-.step .n{font:500 13px var(--mono);color:var(--accent);padding-top:4px}
-.step h3{font-size:22px;margin-bottom:var(--s2)}
-.step p{color:var(--ink-2);max-width:54ch}
-.step figure{margin-top:var(--s4);border-radius:var(--r-m);border:1px solid var(--hair);overflow:hidden;background:var(--surface);transition:transform .2s var(--ease),border-color .2s var(--ease)}
-.step figure:hover{transform:translateY(-2px);border-color:var(--hair-2)}
+/* big centered statement bands */
+.statement{padding:96px 24px;text-align:center}
+.statement h2{font-size:clamp(30px,3.8vw,44px);max-width:22ch;margin:0 auto}
+.statement .sub{color:var(--ink-2);margin:14px auto 0;max-width:52ch}
 
-/* keyboard strip */
-.keys{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--s3)}
-.key{display:flex;justify-content:space-between;align-items:center;padding:var(--s4) var(--s5);background:var(--surface);border:1px solid var(--hair);border-radius:var(--r-m);transition:transform .2s var(--ease),background .2s var(--ease)}
-.key:hover{transform:translateY(-2px);background:var(--surface-2)}
-.key .dot{width:8px;height:8px;border-radius:50%;margin-right:var(--s3);flex:none}
-.key span{display:flex;align-items:center;font-size:14px}
+/* bento visuals */
+.shot{border:1px solid var(--hair);border-radius:10px;overflow:hidden;width:100%}
+.bigtype{font:600 clamp(64px,9vw,120px)/1 var(--display);letter-spacing:-.04em;background:linear-gradient(180deg,#FFFFFF 20%,#9BA0AC 55%,#3A3D46 90%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 10px 30px rgba(0,0,0,.5))}
+.bigtype .acc{background:linear-gradient(180deg,#BFF3FF,#4ADDFF 60%,#0E7EA0);-webkit-background-clip:text;background-clip:text;color:transparent}
+.scorewrap{display:flex;align-items:baseline;gap:18px}
+.scorewrap .dim{font:600 44px var(--display);color:var(--ink-3);letter-spacing:-.03em}
 
-/* gallery */
-.gallery{display:grid;grid-template-columns:1fr 1fr;gap:var(--s4)}
-.gallery figure img{border-radius:var(--r-m);border:1px solid var(--hair)}
-.gallery figcaption{margin-top:var(--s3);font-size:13px;color:var(--ink-3)}
-video{width:100%;border-radius:var(--r-l);border:1px solid var(--hair);display:block;background:#000}
+/* icon row */
+.c4 .cell{padding:40px 32px;text-align:center}
+.c4 svg{width:26px;height:26px;stroke:var(--ink-2);margin:0 auto 14px;display:block}
+.c4 h3{font-size:15px}
+.c4 .sub{font-size:13px;margin:4px auto 0;max-width:24ch}
 
-/* pricing: one surface, split */
-.price{display:grid;grid-template-columns:1fr auto;gap:var(--s6);align-items:center;padding:var(--s6);background:var(--surface);border:1px solid var(--hair);border-radius:var(--r-xl)}
-.price .amount{font:600 72px/1 var(--display);letter-spacing:-.03em}
-.price .amount small{font:500 16px var(--body);color:var(--ink-2);letter-spacing:0;margin-left:6px}
-.price ul{list-style:none;margin:var(--s4) 0 0;display:grid;gap:6px;color:var(--ink-2);font-size:14px}
-.price li::before{content:"—";color:var(--ink-3);margin-right:10px}
-.price .right{text-align:right;display:grid;gap:var(--s3);justify-items:end}
-.price .fine{font-size:12px;color:var(--ink-3);max-width:28ch}
+/* typographic moment */
+.moment{padding:110px 24px;text-align:center;position:relative;overflow:hidden}
+.moment .word{font:600 italic clamp(56px,9vw,110px)/1.02 var(--display);letter-spacing:-.045em;background:linear-gradient(160deg,#FFFFFF 10%,#C9CDD6 35%,#5A5E68 60%,#EDEFF4 85%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.moment .sub{margin-top:18px;color:var(--ink-3);font:500 12px var(--mono);letter-spacing:.12em;text-transform:uppercase}
 
-/* download */
-.dl{display:flex;justify-content:space-between;align-items:center;gap:var(--s5);flex-wrap:wrap}
-.dl .meta{font:500 12px var(--mono);color:var(--ink-3)}
-footer{padding:var(--s6) 0;border-top:1px solid var(--hair);color:var(--ink-3);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--s3)}
+/* demo */
+.demo{padding:24px}
+.demo video{width:100%;border:1px solid var(--hair-2);border-radius:12px;display:block;background:#000}
+
+/* pricing */
+.price .cell{padding:56px 48px}
+.price .amount{font:600 64px/1 var(--display);letter-spacing:-.04em;margin:18px 0 4px}
+.price .amount small{font:500 15px var(--body);letter-spacing:0;color:var(--ink-2)}
+.price ul{list-style:none;margin:22px 0 30px;display:grid;gap:10px;color:var(--ink-2);font-size:14px}
+.price li{display:flex;gap:12px;align-items:baseline}
+.price li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent);flex:none;transform:translateY(-2px)}
+.price .fine{font-size:12px;color:var(--ink-3);margin-top:14px}
+
+/* download + footer */
+.dlband{padding:96px 24px;text-align:center;position:relative;overflow:hidden}
+.dlband::after{content:"";position:absolute;left:50%;bottom:-160px;width:640px;height:320px;transform:translateX(-50%);background:radial-gradient(50% 60% at 50% 40%,rgba(74,221,255,.30),transparent 70%);filter:blur(30px);pointer-events:none}
+.dlband h2{font-size:clamp(28px,3.4vw,40px)}
+.dlband .meta{margin-top:18px;font:500 11px var(--mono);letter-spacing:.08em;color:var(--ink-3)}
+footer{display:flex;justify-content:space-between;gap:16px;padding:28px 24px;color:var(--ink-3);font-size:12.5px;flex-wrap:wrap}
 footer a:hover{color:var(--ink-2)}
 
-@media (max-width:880px){
-  .hero{padding-top:var(--s6)}
-  .split{grid-template-columns:1fr}.split .sticky{position:static}
-  .gallery{grid-template-columns:1fr}
-  .price{grid-template-columns:1fr}.price .right{justify-items:start;text-align:left}
+/* reveal */
+.rv{opacity:0;transform:translateY(14px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.rv.in{opacity:1;transform:none}
+
+@media (max-width:860px){
+  .c2,.c4{grid-template-columns:1fr}
+  .cell{padding:40px 24px}
   nav .links{display:none}
+  .hero .inner{padding:64px 16px}
 }
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
 </style>
 </head>
 <body>
-<div class="backdrop" aria-hidden="true"></div>
-<div class="wrap">
+<div class="shell">
+
   <nav>
     <a class="brand" href="#"><img src="assets/logo.png" alt="">Pickwise</a>
-    <div class="links"><a href="#how">How it works</a><a href="#demo">Demo</a><a href="#pricing">Pricing</a></div>
-    <a class="btn" id="dl-nav" href="downloads/Pickwise.dmg">Download</a>
+    <div class="links"><a href="#features">Features</a><a href="#demo">Demo</a><a href="#pricing">Pricing</a></div>
+    <a class="btn accent" id="dl-nav" href="downloads/Pickwise.dmg">Download</a>
   </nav>
 
-  <header class="hero">
-    <div class="copy">
-      <span class="platform">macOS 13+ · Apple silicon &amp; Intel</span>
-      <h1>Which one should I buy?<br><em>Ask once.</em></h1>
-      <p class="lede">Type in two to five products. Pickwise checks current prices and specs, weighs the trade-offs, and answers with one verdict — and the reasoning behind it.</p>
-      <div class="cta">
+  <div class="heroWrap">
+    <header class="hero">
+      <div class="glow"></div><div class="dots"></div><div class="vig"></div>
+      <div class="inner">
+        <span class="pill"><i></i>Now on macOS · free to try</span>
+        <h1>Which one should I buy? <em>Ask once.</em></h1>
+        <p>Give Pickwise two to five products. It checks current prices and specs, weighs the trade-offs, and answers with one verdict — and the reasoning behind it.</p>
         <a class="btn accent" id="dl-hero" href="downloads/Pickwise.dmg">Download for Mac</a>
-        <a class="btn" href="#demo">Watch the demo <span class="kbdrow"><kbd>60s</kbd></span></a>
+        <small>MACOS 13+ · APPLE SILICON &amp; INTEL · NOTARIZED</small>
       </div>
-      <p class="fine">Five comparisons free, no account. Then <b>$5.99 a month</b>. Signed and notarized by Apple.</p>
-    </div>
-    <div class="palette"><img src="assets/screenshot-verdict.png" alt="Pickwise comparing three headphones and recommending the Sony WH-1000XM5" width="1240" height="950" fetchpriority="high"></div>
-  </header>
+    </header>
+  </div>
 
-  <section id="how">
-    <div class="split">
-      <div class="sticky">
-        <h2>Three moves. One answer.</h2>
-        <p class="lede" style="margin-top:var(--s4)">Every comparison follows the same shape, so you always know where the verdict came from.</p>
-      </div>
-      <div class="steps">
-        <div class="step">
-          <div class="n">01</div>
-          <div>
-            <h3>Put the contenders in</h3>
-            <p>Names, store links, or pasted spec sheets. Looking at a product page? Press the camera, drag a box over it, and it's in.</p>
-            <figure><img src="assets/ui-input.png" alt="Three product inputs with screen-capture buttons" loading="lazy"></figure>
-          </div>
-        </div>
-        <div class="step">
-          <div class="n">02</div>
-          <div>
-            <h3>It does the research</h3>
-            <p>Pickwise searches the web for today's prices and specs, scores each product 0–100, and lists the honest pros and cons — with sources you can open.</p>
-            <figure><img src="assets/ui-cards.png" alt="Per-product score rings with pros and cons" loading="lazy"></figure>
-          </div>
-        </div>
-        <div class="step">
-          <div class="n">03</div>
-          <div>
-            <h3>You get a verdict, not a shortlist</h3>
-            <p>“Go with X.” Then why, who the runner-up is, and the situations where you'd choose differently.</p>
-            <figure><img src="assets/ui-verdict.png" alt="The verdict card: Go with the Sony WH-1000XM5" loading="lazy"></figure>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <div class="appband rv">
+    <div class="frame"><img src="assets/screenshot-verdict.png" alt="Pickwise comparing three headphones and recommending the Sony WH-1000XM5" width="1240" height="950" fetchpriority="high"></div>
+  </div>
 
-  <section id="keys">
-    <h2 style="margin-bottom:var(--s5)">Built for the keyboard</h2>
-    <div class="keys">
-      <div class="key"><span><i class="dot" style="background:var(--accent)"></i>New comparison</span><span class="kbdrow"><kbd>⌘</kbd><kbd>N</kbd></span></div>
-      <div class="key"><span><i class="dot" style="background:var(--win)"></i>Compare</span><span class="kbdrow"><kbd>⌘</kbd><kbd>↵</kbd></span></div>
-      <div class="key"><span><i class="dot" style="background:var(--warn)"></i>Settings</span><span class="kbdrow"><kbd>⌘</kbd><kbd>,</kbd></span></div>
-    </div>
-  </section>
+  <div class="row"><div class="cell statement rv">
+    <h2>Thirty tabs of research, delivered as one answer.</h2>
+    <p class="sub">No affiliate listicles. No "it depends." A comparison table, honest pros and cons, and a verdict that commits.</p>
+  </div></div>
 
-  <section id="gallery">
-    <div class="gallery">
-      <figure><img src="assets/screenshot-verdict.png" alt="Pickwise in dark appearance" loading="lazy"><figcaption>Dark appearance</figcaption></figure>
-      <figure><img src="assets/screenshot-light.png" alt="Pickwise in light appearance" loading="lazy"><figcaption>Light appearance — follows the system setting</figcaption></figure>
+  <div class="row c2" id="features">
+    <div class="cell rv">
+      <span class="label">Input</span>
+      <h3>Any product, however you have it</h3>
+      <p class="sub">Type names, paste links or spec sheets — or press the capture key and drag a box over the product page you're looking at.</p>
+      <div class="viz"><img class="shot" src="assets/ui-input.png" alt="Product inputs with screen-capture buttons" loading="lazy"></div>
     </div>
-  </section>
+    <div class="cell rv">
+      <span class="label">Research</span>
+      <h3>Live prices, cited sources</h3>
+      <p class="sub">It searches the web at compare time, so the numbers are today's — and every claim links back to where it came from.</p>
+      <div class="viz"><div class="bigtype">$328</div></div>
+    </div>
+    <div class="cell rv">
+      <span class="label">Scoring</span>
+      <h3>Every contender, scored</h3>
+      <p class="sub">A 0–100 value score per product, backed by a side-by-side table of the criteria that matter for that category.</p>
+      <div class="viz scorewrap"><div class="bigtype acc"><span class="acc">88</span></div><div class="dim">82</div><div class="dim">71</div></div>
+    </div>
+    <div class="cell rv">
+      <span class="label">Verdict</span>
+      <h3>"Go with X." Full stop.</h3>
+      <p class="sub">The winner, the why, the runner-up, and the caveats — the situations where you'd choose differently.</p>
+      <div class="viz"><img class="shot" src="assets/ui-verdict.png" alt="The verdict card: Go with the Sony WH-1000XM5" loading="lazy"></div>
+    </div>
+  </div>
 
-  <section id="demo">
-    <h2 style="margin-bottom:var(--s5)">Sixty seconds, three headphones</h2>
+  <div class="row c4">
+    <div class="cell rv"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8"/></svg><h3>Native Mac app</h3><p class="sub">SwiftUI, signed and notarized. Not a web view.</p></div>
+    <div class="cell rv"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg><h3>No setup</h3><p class="sub">First five comparisons need no account at all.</p></div>
+    <div class="cell rv"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h.01M11 10h.01M15 10h.01M7 14h10"/></svg><h3>Keyboard-first</h3><p class="sub">⌘N new · ⌘↵ compare · ⌘, settings.</p></div>
+    <div class="cell rv"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36A5.5 5.5 0 0 1 12 3z"/></svg><h3>Light &amp; dark</h3><p class="sub">Follows your system appearance.</p></div>
+  </div>
+
+  <div class="row"><div class="cell moment rv">
+    <div class="word">Decide once.</div>
+    <p class="sub">Then get on with your day</p>
+  </div></div>
+
+  <div class="row" id="demo"><div class="cell demo rv" style="padding:24px">
     <video controls playsinline preload="metadata" poster="assets/screenshot-verdict.png"><source src="assets/demo.mp4" type="video/mp4"></video>
-  </section>
+  </div></div>
 
-  <section id="pricing">
-    <div class="price">
-      <div>
-        <h2>Try five, then subscribe</h2>
-        <p class="lede" style="margin-top:var(--s3)">Your first five comparisons are free — no account, no key, nothing to set up. Pickwise Pro keeps it going.</p>
-        <ul>
-          <li>50 comparisons a month, screen capture included</li>
-          <li>AI usage included — no API keys</li>
-          <li>Cancel anytime from your Polar receipt</li>
-        </ul>
-      </div>
-      <div class="right">
-        <div class="amount">$5.99<small>/ month</small></div>
-        <a class="btn accent" id="dl-price" href="downloads/Pickwise.dmg">Start with 5 free</a>
-        <a class="btn" href="https://buy.polar.sh/polar_cl_L0tIX7HRzlAE0Q3KzoqMQju5ZfDhSGXQOFxUA409HXp">Subscribe to Pro</a>
-        <p class="fine">Subscribe from inside the app once you've used your free comparisons.</p>
-      </div>
+  <div class="row c2 price" id="pricing">
+    <div class="cell rv">
+      <span class="label">Free</span>
+      <div class="amount">5<small> comparisons</small></div>
+      <p class="sub">On the house — no account, no key, nothing to set up.</p>
+      <ul>
+        <li>Full verdicts, tables, and sources</li>
+        <li>Screen capture included</li>
+      </ul>
+      <a class="btn" id="dl-price" href="downloads/Pickwise.dmg">Download free</a>
     </div>
-  </section>
+    <div class="cell rv" style="background:var(--cell-2)">
+      <span class="label" style="color:var(--accent)">Pro</span>
+      <div class="amount">$5.99<small> / month</small></div>
+      <p class="sub">For people who compare more than they'd admit.</p>
+      <ul>
+        <li>50 comparisons a month, AI usage included</li>
+        <li>Use on up to 3 Macs</li>
+        <li>Cancel anytime from your receipt</li>
+      </ul>
+      <a class="btn accent" href="https://buy.polar.sh/polar_cl_L0tIX7HRzlAE0Q3KzoqMQju5ZfDhSGXQOFxUA409HXp">Subscribe to Pro</a>
+      <p class="fine">Subscribing emails you a key — paste it into the app once.</p>
+    </div>
+  </div>
 
-  <section id="download">
-    <div class="dl">
-      <div>
-        <h2>Download Pickwise</h2>
-        <p class="muted" style="margin-top:var(--s2)">Universal binary · macOS 13 Ventura or later · Developer ID signed, notarized, stapled.</p>
-      </div>
-      <div style="display:grid;gap:var(--s2);justify-items:end">
-        <a class="btn accent" id="dl-main" href="downloads/Pickwise.dmg">Download Pickwise.dmg</a>
-        <span class="meta" id="version">v1.0.0</span>
-      </div>
-    </div>
-  </section>
+  <div class="row"><div class="cell dlband rv">
+    <h2>Stop researching. Start deciding.</h2>
+    <p style="margin:14px 0 26px;color:var(--ink-2)">Universal binary · macOS 13 Ventura or later</p>
+    <a class="btn accent" id="dl-main" href="downloads/Pickwise.dmg">Download Pickwise.dmg</a>
+    <p class="meta" id="version">V1.0.0</p>
+  </div></div>
 
   <footer>
     <span>© 2026 Meet Jethwa</span>
-    <span><a href="mailto:meetjethwa3@gmail.com">Support</a> · Product names belong to their owners; Pickwise has no affiliate links.</span>
+    <span><a href="mailto:meetjethwa3@gmail.com">Support</a> · Product names belong to their owners. Pickwise has no affiliate links.</span>
   </footer>
+
 </div>
 <script>
-// Keep download links + version label in sync with version.json (the same feed the app's updater reads).
 fetch('version.json',{cache:'no-store'}).then(r=>r.json()).then(v=>{
-  document.getElementById('version').textContent='v'+v.version+' · build '+v.build;
+  document.getElementById('version').textContent='V'+v.version+' · BUILD '+v.build;
   for(const id of ['dl-nav','dl-hero','dl-price','dl-main']) document.getElementById(id).href=v.url;
 }).catch(()=>{});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 </script>
 </body>
 </html>
