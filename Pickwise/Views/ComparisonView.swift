@@ -16,6 +16,10 @@ struct ComparisonView: View {
                 if store.isComparing {
                     ProgressRow()
                 } else if let r = binding.wrappedValue.result {
+                    HStack {
+                        Spacer()
+                        ShareReportButton(comparison: binding.wrappedValue)
+                    }
                     ResultView(result: r)
                 }
             }
@@ -129,6 +133,46 @@ struct ProgressRow: View {
                 try? await Task.sleep(nanoseconds: 12_000_000_000)
                 withAnimation { phase = min(phase + 1, steps.count - 1) }
             }
+        }
+    }
+}
+
+
+/// Renders the PDF and hands it to the system share picker; errors go to the app error sheet.
+struct ShareReportButton: View {
+    @EnvironmentObject var store: AppStore
+    let comparison: Comparison
+
+    var body: some View {
+        ShareButtonRepresentable(comparison: comparison) { store.error = $0 }
+            .frame(width: 110, height: 32)
+            .help("Share this comparison as a PDF")
+    }
+}
+
+private struct ShareButtonRepresentable: NSViewRepresentable {
+    let comparison: Comparison
+    let onError: (AppError) -> Void
+
+    func makeNSView(context: Context) -> NSButton {
+        let b = NSButton(title: "Share PDF", target: context.coordinator, action: #selector(Coordinator.share(_:)))
+        b.bezelStyle = .rounded
+        context.coordinator.parent = self
+        return b
+    }
+    func updateNSView(_ nsView: NSButton, context: Context) { context.coordinator.parent = self }
+    func makeCoordinator() -> Coordinator { Coordinator(parent: self) }
+
+    @MainActor final class Coordinator: NSObject {
+        var parent: ShareButtonRepresentable
+        init(parent: ShareButtonRepresentable) { self.parent = parent }
+        @objc func share(_ sender: NSButton) {
+            do {
+                let url = try ReportExporter.exportPDF(parent.comparison)
+                let picker = NSSharingServicePicker(items: [url])
+                picker.show(relativeTo: sender.bounds, of: sender, preferredEdge: .minY)
+            } catch let e as AppError { parent.onError(e) }
+            catch { parent.onError(AppError("Couldn't share the comparison", error: error)) }
         }
     }
 }

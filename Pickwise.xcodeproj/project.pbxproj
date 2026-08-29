@@ -11,6 +11,7 @@
 		09045EC58744F062BCA51074 /* SheetsAndSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D52D9991E5B27B6F683B764 /* SheetsAndSettings.swift */; };
 		1D7E26CC72A0A1151352AEF0 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8934C7411C2EEEA5A17328F /* ResultView.swift */; };
 		34D7B19A0161A24E09516492 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1409CEDCACE7EF8DF69A589C /* Assets.xcassets */; };
+		4BB5786D103AA251666E8821 /* ReportExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A3BB8FAB3E4ABA7F4B64BD /* ReportExporter.swift */; };
 		55572CE90D63FEEC7FA19AE5 /* ScreenCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB24D53C6B51CD489F758609 /* ScreenCapture.swift */; };
 		56F4BC251630E22114E07EAB /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BF9F932D9BCCE3801AE228 /* SampleData.swift */; };
 		5E28A3194C0893D369930C5F /* UpdateChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5516003FDDEE9378C1EB1CC0 /* UpdateChecker.swift */; };
@@ -38,6 +39,7 @@
 		5516003FDDEE9378C1EB1CC0 /* UpdateChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateChecker.swift; sourceTree = "<group>"; };
 		5E9F7C0CE4804A1282DD9A9C /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		66C9659F4654479C006B3911 /* Pickwise.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pickwise.entitlements; sourceTree = "<group>"; };
+		71A3BB8FAB3E4ABA7F4B64BD /* ReportExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportExporter.swift; sourceTree = "<group>"; };
 		7D52D9991E5B27B6F683B764 /* SheetsAndSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetsAndSettings.swift; sourceTree = "<group>"; };
 		A03252D568336CD2C3954980 /* Comparison.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comparison.swift; sourceTree = "<group>"; };
 		A03C3FFE76FA4FA32180DCA5 /* LicenseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseManager.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 				A03C3FFE76FA4FA32180DCA5 /* LicenseManager.swift */,
 				F46FF349B3145697768379EF /* PickwiseAPI.swift */,
 				022DA0EC1AEF6A7F56D77CDD /* PolarConfig.swift */,
+				71A3BB8FAB3E4ABA7F4B64BD /* ReportExporter.swift */,
 				BB24D53C6B51CD489F758609 /* ScreenCapture.swift */,
 				5516003FDDEE9378C1EB1CC0 /* UpdateChecker.swift */,
 			);
@@ -223,6 +226,7 @@
 				D12C8314488CF89826F8B426 /* PickwiseAPI.swift in Sources */,
 				6EEDCBA96E60CE90F73D59AA /* PickwiseApp.swift in Sources */,
 				97BD7E0D007D909FA9B5002C /* PolarConfig.swift in Sources */,
+				4BB5786D103AA251666E8821 /* ReportExporter.swift in Sources */,
 				1D7E26CC72A0A1151352AEF0 /* ResultView.swift in Sources */,
 				D05CFA3E5D9B9501CEBEB9C3 /* RootView.swift in Sources */,
 				56F4BC251630E22114E07EAB /* SampleData.swift in Sources */,
@@ -270,7 +274,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = C9NLF34677;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -375,7 +379,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = C9NLF34677;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
