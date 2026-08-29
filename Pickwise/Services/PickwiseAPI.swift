@@ -3,7 +3,7 @@ import Foundation
 /// Client for the Pickwise API (Server/). The server holds the model key and meters usage;
 /// the app sends candidates plus either a subscription key or an anonymous device id.
 struct PickwiseAPI {
-    static let baseURL = URL(string: ProcessInfo.processInfo.environment["PICKWISE_API"] ?? "https://pickwise-api.onrender.com")!
+    static let baseURL = URL(string: ProcessInfo.processInfo.environment["PICKWISE_API"] ?? "https://pickwise-api-3jv9.onrender.com")!
     static let deviceIDKey = "device-id"
 
     /// Stable anonymous id for the free tier, created once and kept in the Keychain.
