@@ -78,13 +78,15 @@ struct PaywallView: View {
                 VStack(alignment: .leading, spacing: Brand.Space.m) {
                     Text("Pickwise Pro").font(Brand.Font.hero)
                     Text(headline).font(Brand.Font.body).foregroundStyle(Brand.Color.ink2)
-                    HStack(alignment: .firstTextBaseline, spacing: 6) {
-                        Text(PolarConfig.price).font(Brand.Font.hero)
-                        Text("per \(PolarConfig.period) · \(PolarConfig.monthlyComparisons) comparisons · cancel anytime")
+                    VStack(alignment: .leading, spacing: 6) {
+                        planRow(PolarConfig.price, "per month")
+                        planRow(PolarConfig.yearlyPrice, "per year · 2 months free")
+                        planRow(PolarConfig.lifetimePrice, "once · yours forever")
+                        Text("Every plan: \(PolarConfig.monthlyComparisons) comparisons a month, AI included.")
                             .font(Brand.Font.caption).foregroundStyle(Brand.Color.ink2)
                     }
                     if !lic.isPro {
-                        Button("Subscribe") { lic.openCheckout() }.buttonStyle(PillButtonStyle(role: .primary))
+                        Button("Choose a plan") { lic.openCheckout() }.buttonStyle(PillButtonStyle(role: .primary))
                         Text("You'll get a subscription key by email. Paste it below.").font(Brand.Font.caption).foregroundStyle(Brand.Color.ink3)
                         Divider().overlay(Brand.Color.hairline)
                         Text("Have a key?").font(Brand.Font.headline)
@@ -107,6 +109,13 @@ struct PaywallView: View {
             .padding(Brand.Space.l)
         }
         .frame(width: 520)
+    }
+
+    private func planRow(_ price: String, _ note: String) -> some View {
+        HStack(alignment: .firstTextBaseline, spacing: 8) {
+            Text(price).font(Brand.Font.title).frame(width: 76, alignment: .leading)
+            Text(note).font(Brand.Font.caption).foregroundStyle(Brand.Color.ink2)
+        }
     }
 
     private var headline: String {
