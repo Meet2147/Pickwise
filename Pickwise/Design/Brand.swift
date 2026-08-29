@@ -1,5 +1,9 @@
 import SwiftUI
+#if canImport(AppKit)
 import AppKit
+#else
+import UIKit
+#endif
 
 /// Pickwise design system.
 /// Charcoal ground, translucent hairline surfaces, ONE accent. Type does the work;
@@ -24,10 +28,17 @@ enum Brand {
         static let surface2 = SwiftUI.Color.primary.opacity(0.09)
 
         fileprivate static func adaptive(light: (Double, Double, Double), dark: (Double, Double, Double)) -> SwiftUI.Color {
-            SwiftUI.Color(nsColor: NSColor(name: nil) { app in
+            #if canImport(AppKit)
+            return SwiftUI.Color(nsColor: NSColor(name: nil) { app in
                 let c = app.bestMatch(from: [.aqua, .darkAqua]) == .darkAqua ? dark : light
                 return NSColor(red: c.0, green: c.1, blue: c.2, alpha: 1)
             })
+            #else
+            return SwiftUI.Color(uiColor: UIColor { traits in
+                let c = traits.userInterfaceStyle == .dark ? dark : light
+                return UIColor(red: c.0, green: c.1, blue: c.2, alpha: 1)
+            })
+            #endif
         }
     }
 

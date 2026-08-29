@@ -32,7 +32,10 @@ struct PickwiseAPI {
             },
             "deviceId": Self.deviceID,
         ]
-        if let key = await LicenseManager.shared.storedKey, let act = await LicenseManager.shared.storedActivationID {
+        // Read the subscription key straight from the Keychain so this client has no
+        // dependency on platform-specific license UI.
+        if let key = KeychainStore.get("polar-license-key"), !key.isEmpty,
+           let act = KeychainStore.get("polar-activation-id") {
             body["licenseKey"] = key; body["activationId"] = act
         }
 
@@ -40,7 +43,8 @@ struct PickwiseAPI {
         req.httpMethod = "POST"
         req.timeoutInterval = 600
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        req.setValue("Pickwise/\(UpdateChecker.currentBuild)", forHTTPHeaderField: "User-Agent")
+        let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "0"
+        req.setValue("Pickwise/\(build)", forHTTPHeaderField: "User-Agent")
         req.httpBody = try JSONSerialization.data(withJSONObject: body)
 
         let data: Data, response: URLResponse

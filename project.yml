@@ -17,6 +17,33 @@ settings:
     ONLY_ACTIVE_ARCH: NO
     DEVELOPMENT_TEAM: C9NLF34677
 targets:
+  PickwiseMobile:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: iOS
+      - path: Pickwise/Models
+      - path: Pickwise/Design/Brand.swift
+      - path: Pickwise/Views/ResultView.swift
+      - path: Pickwise/Services/AppError.swift
+      - path: Pickwise/Services/KeychainStore.swift
+      - path: Pickwise/Services/HistoryStore.swift
+      - path: Pickwise/Services/PickwiseAPI.swift
+    info:
+      path: iOS/Info.plist
+      properties:
+        CFBundleName: Pickwise
+        CFBundleDisplayName: Pickwise
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.meetjethwa.Pickwise.ios
+        CODE_SIGN_STYLE: Automatic
+        TARGETED_DEVICE_FAMILY: "1"
   Pickwise:
     type: application
     platform: macOS
