@@ -12,7 +12,7 @@ services:
         value: max-age=63072000; includeSubDomains; preload
       - path: /*
         name: Content-Security-Policy
-        value: "default-src 'self'; img-src 'self' data:; media-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://pickwise-api-3jv9.onrender.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'"
+        value: "default-src 'self'; img-src 'self' data: https://productwatch.io; media-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://pickwise-api-3jv9.onrender.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'"
       - path: /*
         name: X-Content-Type-Options
         value: nosniff
