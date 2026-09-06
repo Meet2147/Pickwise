@@ -130,13 +130,14 @@ struct EditorView: View {
                         .buttonStyle(NeuButtonStyle())
                         .disabled(comparison.candidates.count >= 5)
                         Spacer()
+                        let filled = comparison.candidates.filter { !$0.isEmpty }.count
                         Button {
                             Task { await store.run(comparison) }
                         } label: {
-                            Label(store.isComparing ? "Comparing…" : "Compare", systemImage: "sparkle")
+                            Label(store.isComparing ? "Comparing…" : (filled == 1 ? "Find better" : "Compare"), systemImage: "sparkle")
                         }
                         .buttonStyle(NeuButtonStyle(prominent: true))
-                        .disabled(store.isComparing || comparison.candidates.filter { !$0.isEmpty }.count < 2)
+                        .disabled(store.isComparing || filled < 1)
                     }
                     if store.isComparing { ComparingCard() }
                     if let r = liveResult { MobileResultView(result: r) }

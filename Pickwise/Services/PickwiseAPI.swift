@@ -22,7 +22,7 @@ struct PickwiseAPI {
 
     func compare(_ candidates: [Candidate]) async throws -> Response {
         let live = candidates.filter { !$0.isEmpty }
-        guard live.count >= 2 else { throw AppError("Add at least two products", details: "A comparison needs 2–5 products.") }
+        guard live.count >= 1 else { throw AppError("Add a product", details: "Enter at least one product — with just one, Pickwise finds the alternatives for you.") }
 
         var body: [String: Any] = [
             "candidates": live.map { c -> [String: Any] in

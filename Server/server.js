@@ -186,8 +186,9 @@ const server = http.createServer(async (req, res) => {
     if (req.method === "POST" && req.url === "/v1/compare") {
       let body; try { body = JSON.parse(await readBody(req)); } catch { return json(res, 400, { code: "bad_request", message: "Invalid JSON." }); }
       const { candidates, licenseKey, activationId, deviceId } = body;
-      if (!Array.isArray(candidates) || candidates.length < 2 || candidates.length > 5)
-        return json(res, 400, { code: "bad_request", message: "Send 2–5 candidates." });
+      if (!Array.isArray(candidates) || candidates.length < 1 || candidates.length > 5)
+        return json(res, 400, { code: "bad_request", message: "Send 1–5 candidates." });
+      const findAlternatives = candidates.length === 1;
 
       const ent = await entitle({ licenseKey, activationId, deviceId });
       if (ent.used >= ent.limit)
@@ -202,7 +203,9 @@ const server = http.createServer(async (req, res) => {
         content.push({ type: "text", text: `Product ${i + 1}:${t ? " " + t : ""}` });
         if (c.imagePNG) content.push({ type: "image", source: { type: "base64", media_type: "image/png", data: c.imagePNG } });
       });
-      content.push({ type: "text", text: `Compare these ${candidates.length} products and tell me which one to buy.` });
+      content.push({ type: "text", text: findAlternatives
+        ? "I only have this one product. Identify it, then use web search to find the 2–4 strongest CURRENT alternatives in the same category and price band (real, purchasable products — not discontinued). Put my product FIRST in `products`, then the alternatives, and compare them all. The verdict should name the overall best buy — which may well be my original product."
+        : `Compare these ${candidates.length} products and tell me which one to buy.` });
 
       // Keep the client connection alive while the model works (can take 30–120s).
       res.writeHead(200, { "content-type": "application/json", "transfer-encoding": "chunked", "cache-control": "no-store" });

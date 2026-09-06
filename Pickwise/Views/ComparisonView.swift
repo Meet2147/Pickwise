@@ -32,7 +32,7 @@ struct ComparisonView: View {
     private var header: some View {
         VStack(alignment: .leading, spacing: 6) {
             Text("Which one should I buy?").font(Brand.Font.hero).tracking(-0.4)
-            Text("Two to five products. Names, links, pasted specs, or a screen grab.")
+            Text("Two to five products to compare — or just one, and Pickwise finds the rivals itself.")
                 .font(Brand.Font.body).foregroundStyle(Brand.Color.ink2)
         }
     }
@@ -57,15 +57,16 @@ struct CandidatesEditor: View {
                         .buttonStyle(PillButtonStyle())
                         .disabled(comparison.candidates.count >= 5)
                     Spacer()
+                    let filled = comparison.candidates.filter { !$0.isEmpty }.count
                     Button { Task { await store.runComparison() } } label: {
                         HStack(spacing: 10) {
-                            Text(comparison.result == nil ? "Compare" : "Compare again")
+                            Text(filled == 1 ? "Find better options" : (comparison.result == nil ? "Compare" : "Compare again"))
                             KeyChip(keys: ["⌘", "↵"], onAccent: true)
                         }
                     }
                     .buttonStyle(PillButtonStyle(role: .primary))
                     .keyboardShortcut(.return, modifiers: .command)
-                    .disabled(store.isComparing || comparison.candidates.filter { !$0.isEmpty }.count < 2)
+                    .disabled(store.isComparing || filled < 1)
                 }
                 .padding(Brand.Space.m)
             }
